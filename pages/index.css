@@ -84,7 +84,8 @@
   margin-right: 24px;
 }
 
-.card {
+.card__list {
+  /*card*/
   display: flex;
   flex-direction: column;
   list-style: none;
@@ -94,7 +95,8 @@
   overflow: hidden;
 }
 
-.cards {
+.cards__list {
+  /*card__list*/
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
@@ -201,7 +203,7 @@
   .profile__edit-button {
     padding-left: 10px;
   }
-  .card__list {
+  .cards__list {
     grid-template-columns: repeat(2, 282px);
   }
 }
@@ -217,7 +219,7 @@
   .profile__info {
     grid-template-columns: minmax(auto, auto) auto;
   }
-  .card__list {
+  .cards__list {
     grid-template-columns: repeat(3, 282px);
   }
 }
