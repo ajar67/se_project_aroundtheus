@@ -84,7 +84,7 @@
   margin-right: 24px;
 }
 
-.card {
+.cards__list-item {
   display: flex;
   flex-direction: column;
   list-style: none;
@@ -94,7 +94,7 @@
   overflow: hidden;
 }
 
-.card__list {
+.cards__list {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 282px);
@@ -197,7 +197,7 @@
   .profile__edit-button {
     padding-left: 10px;
   }
-  .card__list {
+  .cards__list {
     grid-template-columns: repeat(2, 282px);
   }
 }
@@ -213,7 +213,7 @@
   .profile__info {
     grid-template-columns: minmax(auto, auto) auto;
   }
-  .card__list {
+  .cards__list {
     grid-template-columns: repeat(3, 282px);
   }
 }
