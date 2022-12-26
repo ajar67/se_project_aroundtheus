@@ -1,0 +1,21 @@
+.page {
+  background-color: black;
+  color: white;
+  font-family: "Inter", "Arial", sans-serif;
+  overflow: hidden;
+}
+
+.page__section {
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.page__content {
+  margin-left: 200px;
+  margin-right: 200px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 880px;
+}
