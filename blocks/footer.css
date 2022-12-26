@@ -6,4 +6,5 @@
 .footer__copywrite {
   display: flex;
   flex-wrap: nowrap;
+  font-family: "Inter", sans-serif;
 }
