@@ -44,7 +44,6 @@
   height: 50px;
   margin-left: auto;
   border-color: white;
-  width: 282px;
   cursor: pointer;
 }
 .profile__add-button :hover {
