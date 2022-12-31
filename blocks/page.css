@@ -10,8 +10,8 @@
 }
 
 .page__content {
-  margin-left: 200px;
-  margin-right: 200px;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   min-height: 100%;
@@ -21,10 +21,6 @@
 @media screen and (min-width: 320px) and (max-width: 700px) {
   .page {
     max-width: 700px;
-  }
-  .page__content {
-    margin-right: auto;
-    margin-left: auto;
   }
 }
 
