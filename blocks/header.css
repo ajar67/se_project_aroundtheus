@@ -1,4 +1,16 @@
 .header {
   margin-top: 45px;
-  border-bottom: 1px solid #545454;
+  border-bottom: 1px solid rgba(239, 239, 240, 0.7);
+}
+
+@media screen and (min-width: 100px) and (max-width: 500px) {
+  .header__image {
+    width: 126px;
+    height: 24px;
+    margin-left: 27px;
+    margin-top: 28px;
+  }
+  .header {
+    margin-top: 0;
+  }
 }

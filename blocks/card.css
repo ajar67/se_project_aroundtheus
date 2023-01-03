@@ -43,6 +43,6 @@
   border: none;
   cursor: pointer;
 }
-.card__like-button :hover {
-  border-color: blue;
+.card__like-button:hover {
+  opacity: 0.5;
 }
