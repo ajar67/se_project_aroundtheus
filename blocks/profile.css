@@ -35,7 +35,7 @@
   cursor: pointer;
 }
 .profile__edit-button:hover {
-  opacity: 0.5;
+  opacity: 60%;
 }
 
 .profile__add-button {
@@ -49,7 +49,7 @@
   border-radius: 2px;
 }
 .profile__add-button:hover {
-  opacity: 0.5;
+  opacity: 60%;
 }
 
 .profile__description {
@@ -83,8 +83,8 @@
     text-align: center;
     margin-top: 26.25px;
   }
-  .profile-image {
-    margin: 0;
+  .profile__image {
+    margin-right: 0;
   }
   .profile__info {
     display: flex;
@@ -97,7 +97,6 @@
     width: 100%;
     margin-top: 14px;
     text-align: center;
-    opacity: 0.5;
     font-size: 14px;
     line-height: 17px;
     margin-bottom: 36px;
