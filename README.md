@@ -24,6 +24,6 @@ project 3 picture.PNG
 
 Heres the link to GitHub:
 
-https://github.com/ajar67/se_project_aroundtheus.git
+https://ajar67.github.io/se_project_aroundtheus/
 
 Good luck and have fun!
