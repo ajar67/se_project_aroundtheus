@@ -1,61 +1,62 @@
 .modal {
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.5);
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
 }
 
 .modal__container {
-    position: relative;
-    background-color: white;
-    color: black;
-    height: 330px;
-    width: 430px;
-    border-radius: 10px;
-    margin: auto;
-    margin-top: 195px;
+  position: relative;
+  background-color: white;
+  color: black;
+  height: 330px;
+  width: 430px;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 195px;
 }
 
 .modal__form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 36px;
-    margin-right: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 36px;
+  margin-right: 36px;
 }
 
 .modal__title {
-    font-family: "Inter", sans-serif; 
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 29px;
-    margin-bottom: 54px;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  margin-bottom: 54px;
 }
 
 .modal__input {
-    font-family: "Inter", sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    width: 358px;
-    height: 14px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  width: 358px;
+  height: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .modal__button {
-    border-radius: 2px;
-    background-color: black;
-    color: white;
-    width: 358px;
-    margin-top: 48px;
+  border-radius: 2px;
+  background-color: black;
+  color: white;
+  width: 358px;
+  margin-top: 48px;
 }
 
 .modal__button-reset {
-    position: fixed;
-    height: 40px;
-    left: 66.15%;
-    right: 30.73%;
-    top: 175px;
+  position: fixed;
+  height: 40px;
+  left: 66.15%;
+  right: 30.73%;
+  top: 175px;
 }
