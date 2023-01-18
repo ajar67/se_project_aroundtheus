@@ -36,10 +36,10 @@ const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__description");
 const cardTemplate = document
   .querySelector(".template")
-  .content.querySelector("card");
+  .content.querySelector(".card");
 
 function editClick() {
-  modal.style.removeProperty("display");
+  modal.classList.add("modal__opened");
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
@@ -55,21 +55,23 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
+  resetClick();
 }
 
 modal.addEventListener("submit", handleProfileFormSubmit);
 
 function getCardElement(data) {
   let cardElement = cardTemplate.cloneNode(true);
-  let cardText = document.querySelector(".card__text");
-  let cardImage = document.querySelector(".card__image");
+  let cardText = cardElement.querySelector(".card__text");
+  let cardImage = cardElement.querySelector(".card__image");
 
   cardImage.src = data.link;
   cardImage.alt = data.name;
   cardText.textContent = data.name;
   return cardElement;
 }
+let cardsList = document.querySelector(".cards__list");
 
-for (let i = 0; i <= initialCards.length; i++) {
-  getCardElement(data);
+for (let i = 0; i < initialCards.length; i++) {
+  cardsList.prepend(getCardElement(initialCards[i]));
 }
