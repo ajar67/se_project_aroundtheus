@@ -39,7 +39,8 @@ const cardTemplate = document
   .content.querySelector(".card");
 
 function editClick() {
-  modal.classList.add("modal__opened");
+  /*modal.classList.add("modal__opened");*/
+  modal.setAttribute("style", "display: block");
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }

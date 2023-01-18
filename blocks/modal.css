@@ -8,9 +8,9 @@
   display: none;
 }
 
-.modal__opened {
+/*.modal__opened {
     display: block;
-}
+}*/
 
 .modal__container {
   position: relative;
