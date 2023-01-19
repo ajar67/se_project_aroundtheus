@@ -8,10 +8,6 @@
   display: none;
 }
 
-/*.modal__opened {
-    display: block;
-}*/
-
 .modal__container {
   position: relative;
   background-color: white;
@@ -65,7 +61,42 @@
 .modal__button-reset {
   position: fixed;
   height: 40px;
+  width: 40px;
   left: 66.15%;
   right: 30.73%;
-  top: 160px; /*// 175px*/
+  top: 160px;
+  background: none;
+}
+
+@media screen and (min-width: 10px) and (max-width: 520px) {
+  .modal__container {
+    height: 322px;
+    width: 282px;
+    margin: 123px auto auto auto;
+  }
+  .modal__form {
+    margin-right: 22px;
+    margin-left: 22px;
+  }
+  .modal__title {
+    font-size: 18px;
+    line-height: 22px;
+    width: 238px;
+    height: 22px;
+  }
+  .modal__input {
+    width: 238px;
+  }
+  .modal__button {
+    width: 238px;
+  }
+  .modal__button-reset {
+    position: fixed;
+    left: 82.69%;
+    right: 9.18%;
+    top: 91px;
+    border: none;
+    height: 26px;
+    width: 26px;
+  }
 }

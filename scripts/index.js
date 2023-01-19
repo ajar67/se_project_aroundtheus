@@ -25,9 +25,9 @@ const initialCards = [
   },
 ];
 
-let profileEditButton = document.querySelector(".profile__edit-button");
-let modalButtonReset = document.querySelector(".modal__button-reset");
-let modal = document.querySelector(".modal");
+const profileEditButton = document.querySelector(".profile__edit-button");
+const modalButtonReset = document.querySelector(".modal__button-reset");
+const modal = document.querySelector(".modal");
 
 const profileFormElement = document.querySelector(".modal__form");
 const nameInput = document.querySelector("#name");
@@ -38,41 +38,40 @@ const cardTemplate = document
   .querySelector(".template")
   .content.querySelector(".card");
 
-function editClick() {
-  /*modal.classList.add("modal__opened");*/
+function openProfileModal() {
   modal.setAttribute("style", "display: block");
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
 
-function resetClick() {
+function closeModal() {
   modal.setAttribute("style", "display: none;");
 }
 
-profileEditButton.addEventListener("click", editClick);
-modalButtonReset.addEventListener("click", resetClick);
+profileEditButton.addEventListener("click", openProfileModal);
+modalButtonReset.addEventListener("click", closeModal);
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  resetClick();
+  closeModal();
 }
 
 modal.addEventListener("submit", handleProfileFormSubmit);
 
 function getCardElement(data) {
-  let cardElement = cardTemplate.cloneNode(true);
-  let cardText = cardElement.querySelector(".card__text");
-  let cardImage = cardElement.querySelector(".card__image");
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardText = cardElement.querySelector(".card__text");
+  const cardImage = cardElement.querySelector(".card__image");
 
   cardImage.src = data.link;
   cardImage.alt = data.name;
   cardText.textContent = data.name;
   return cardElement;
 }
-let cardsList = document.querySelector(".cards__list");
+const cardsList = document.querySelector(".cards__list");
 
-for (let i = 0; i < initialCards.length; i++) {
+for (const i = 0; i < initialCards.length; i++) {
   cardsList.prepend(getCardElement(initialCards[i]));
 }
