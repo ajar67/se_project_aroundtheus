@@ -72,6 +72,6 @@ function getCardElement(data) {
 }
 const cardsList = document.querySelector(".cards__list");
 
-for (const i = 0; i < initialCards.length; i++) {
+for (let i = 0; i < initialCards.length; i++) {
   cardsList.prepend(getCardElement(initialCards[i]));
 }
