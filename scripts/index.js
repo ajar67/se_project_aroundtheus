@@ -39,13 +39,13 @@ const cardTemplate = document
   .content.querySelector(".card");
 
 function openProfileModal() {
-  modal.setAttribute("style", "display: block");
+  modal.classList.add("modal_opened");
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
 
 function closeModal() {
-  modal.setAttribute("style", "display: none;");
+  modal.classList.remove("modal_opened");
 }
 
 profileEditButton.addEventListener("click", openProfileModal);

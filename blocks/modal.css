@@ -18,6 +18,10 @@
   width: 430px;
 }
 
+.modal_opened {
+  display: block;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;
@@ -60,15 +64,18 @@
 
 .modal__button-reset {
   position: fixed;
-  height: 40px;
-  width: 40px;
   left: 66.15%;
   right: 30.73%;
   top: 160px;
   background: none;
+  border: none;
 }
 
-@media screen and (min-width: 10px) and (max-width: 520px) {
+.modal__image_close {
+  height: 40px;
+}
+
+@media screen and (min-width: 10px) and (max-width: 600px) {
   .modal__container {
     height: 322px;
     width: 282px;
@@ -91,12 +98,12 @@
     width: 238px;
   }
   .modal__button-reset {
-    position: fixed;
     left: 82.69%;
     right: 9.18%;
     top: 91px;
     border: none;
+  }
+  .modal__image_close {
     height: 26px;
-    width: 26px;
   }
 }
