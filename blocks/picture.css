@@ -36,11 +36,11 @@
   border: none;
 }
 
-.picture__image_close {
+.picture__image-close {
   height: 40px;
 }
 
-.picture__image_text {
+.picture__image-text {
   position: absolute;
   width: 291px;
   height: 12px;

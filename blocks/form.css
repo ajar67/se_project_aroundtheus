@@ -74,7 +74,7 @@
   border: none;
 }
 
-.form__image_close {
+.form__image-close {
   height: 40px;
 }
 
@@ -106,7 +106,7 @@
     top: 91px;
     border: none;
   }
-  .form__image_close {
+  .form__image-close {
     height: 26px;
   }
 }
