@@ -6,7 +6,7 @@
   right: 0;
   left: 0;
   visibility: hidden;
-  transition: opacity 1s ease-out;
+  transition: opacity 0.5s ease-out;
   opacity: 0;
 }
 
@@ -76,6 +76,25 @@
 
 .modal__image-close {
   height: 40px;
+}
+
+.modal__image-container {
+  margin: 90px auto 90px auto;
+  max-height: 75vh;
+  max-width: 75vw;
+}
+
+.modal__image-text {
+  width: 291px;
+  height: 12px;
+  left: 424px;
+  top: 640px;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
 }
 
 @media screen and (min-width: 10px) and (max-width: 600px) {

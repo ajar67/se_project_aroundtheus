@@ -42,7 +42,8 @@
         <p class="footer__copywrite">© 2022 Around The U.S.</p>
       </footer>
     </div>
-    <div class="modal">
+
+    <div class="modal" id="profile-popup">
       <div class="modal__container">
         <button type="reset" class="modal__button-reset">
           <img
@@ -72,47 +73,47 @@
       </div>
     </div>
 
-    <div class="form">
-      <div class="form__container">
-        <button type="reset" class="form__button-reset">
+    <div class="modal" id="add-card-popup">
+      <div class="modal__container">
+        <button type="reset" class="modal__button-reset">
           <img
             src="./images/close.svg"
             alt="Close image"
-            class="form__image-close"
+            class="modal__image-close"
           />
         </button>
-        <form class="form__structure">
-          <h2 class="form__title">New place</h2>
+        <form class="modal__form">
+          <h2 class="modal__title">New place</h2>
           <input
             type="text"
-            class="form__input"
+            class="modal__input"
             id="title"
             name="title"
             placeholder="Title"
           />
           <input
             type="text"
-            class="form__input"
+            class="modal__input"
             id="image"
             name="image"
             placeholder="Image URL"
           />
-          <button type="submit" class="form__button">Create</button>
+          <button type="submit" class="modal__button">Create</button>
         </form>
       </div>
     </div>
 
-    <div class="picture">
-      <div class="picture__container">
-        <button type="reset" class="picture__button-reset">
+    <div class="modal" id="picture-popup">
+      <div class="modal__image-container">
+        <button type="reset" class="modal__button-reset">
           <img
             src="./images/close.svg"
             alt="Close image"
-            class="picture__image-close"
+            class="modal__image-close"
           />
         </button>
-        <img src=" " alt="" class="picture__image-clicked" />
-        <p class="picture__image-text"></p>
+        <img src=" " alt="" class="modal__image-clicked" />
+        <p class="modal__image-text"></p>
       </div>
     </div>
 
