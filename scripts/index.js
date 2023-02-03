@@ -71,7 +71,7 @@ function handleProfileModalSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  closeModal();
+  closePopup(profilePopup);
 }
 profilePopup.addEventListener("submit", handleProfileModalSubmit);
 
