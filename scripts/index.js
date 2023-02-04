@@ -44,6 +44,11 @@ const titleInput = document.querySelector("#title");
 const imageInput = document.querySelector("#image");
 const cardText = document.querySelector(".card__text");
 
+const picturePopup = document.querySelector("#picture-popup");
+const pictureButtonReset = picturePopup.querySelector(".modal__button-reset");
+const pictureImageOpen = picturePopup.querySelector(".modal__image-clicked");
+const pictureImageText = picturePopup.querySelector(".modal__image-text");
+
 const cardTemplate = document
   .querySelector(".template")
   .content.querySelector(".card");
@@ -90,8 +95,7 @@ function handleCardFormSubmit(evt) {
     getCardElement({ link: imageInput.value, name: titleInput.value })
   );
   closePopup(addCardPopup);
-  imageInput.value = "";
-  titleInput.value = "";
+  evt.target.reset();
 }
 addCardPopupForm.addEventListener("submit", handleCardFormSubmit);
 
@@ -123,11 +127,6 @@ function getCardElement(data) {
 
   // --------------opens the image if clicked on it-----------------------------------------------
 
-  const picturePopup = document.querySelector("#picture-popup");
-  const pictureButtonReset = picturePopup.querySelector(".modal__button-reset");
-  const pictureImageOpen = picturePopup.querySelector(".modal__image-clicked");
-  const pictureImageText = picturePopup.querySelector(".modal__image-text");
-
   cardImage.addEventListener("click", function () {
     openPopup(picturePopup);
     pictureImageOpen.src = data.link;
@@ -136,11 +135,11 @@ function getCardElement(data) {
   });
 
   // ---------------reset button on big image------------------------------------------
-  pictureButtonReset.addEventListener("click", () => closePopup(picturePopup));
 
   return cardElement;
 }
 
+pictureButtonReset.addEventListener("click", () => closePopup(picturePopup));
 // -------------adds initial cards to the page---------------------------------------------
 
 const cardsList = document.querySelector(".cards__list");
