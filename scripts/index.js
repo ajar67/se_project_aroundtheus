@@ -55,9 +55,11 @@ const cardTemplate = document
 
 function openPopup(popup) {
   popup.classList.add("modal_opened");
+  document.addEventListener("keydown", closePopupByEsc);
 }
 function closePopup(popup) {
   popup.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closePopupByEsc);
 }
 
 // ----------opens edit profile button--------------------------------------------------
@@ -152,21 +154,20 @@ initialCards.forEach(function (item) {
 // ---------------------------close popups by overlay click and Esc key---------------------
 
 function closePopupByOverlayClick(evt) {
-  const modalOpened = document.querySelector(".modal__opened");
+  const modalOpened = document.querySelector(".modal_opened");
   if (evt.target.matches(".modal")) {
     closePopup(modalOpened);
   }
 }
 
 function closePopupByEsc(evt) {
-  const modalOpened = document.querySelector(".modal__opened");
-  if (evt.key === "Esc") {
+  const modalOpened = document.querySelector(".modal_opened");
+  if (evt.key === "Escape") {
     closePopup(modalOpened);
   }
 }
 
 const modals = document.querySelectorAll(".modal");
 modals.forEach((modal) => {
-  modal.addEventListener("keydown", closePopupByEsc(evt));
-  modal.addEventListener("click", closePopupByOverlayClick(evt));
+  modal.addEventListener("click", closePopupByOverlayClick);
 });
