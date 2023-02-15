@@ -146,3 +146,17 @@ const cardsList = document.querySelector(".cards__list");
 initialCards.forEach(function (item) {
   cardsList.prepend(getCardElement(item));
 });
+
+// ------------------closes modal by Esc-------------------------------------------------------
+document.addEventListener("keydown", (evt, popup) => {
+  if (evt.key === "Esc") {
+    closePopup(popup);
+  }
+});
+
+// ------------------------closes modal by overlay---------------------------------------------
+document.addEventListener("click", (event) => {
+  if (!event.target.matches(".modal")) {
+    closePopup(popup);
+  }
+});
