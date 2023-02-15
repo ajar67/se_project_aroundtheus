@@ -96,6 +96,8 @@ function handleCardFormSubmit(evt) {
   );
   closePopup(addCardPopup);
   evt.target.reset();
+  const submitButton = addCardPopup.querySelector(".modal__button");
+  disableButton(submitButton, config.inactiveButtonClass);
 }
 addCardPopupForm.addEventListener("submit", handleCardFormSubmit);
 
@@ -147,16 +149,19 @@ initialCards.forEach(function (item) {
   cardsList.prepend(getCardElement(item));
 });
 
-// ------------------closes modal by Esc-------------------------------------------------------
-document.addEventListener("keydown", (evt, popup) => {
-  if (evt.key === "Esc") {
-    closePopup(popup);
+function closePopupByOverlayClick(evt) {
+  const modalOpened = document.querySelector(".modal__opened");
+  if (evt.target.matches(".modal")) {
+    closePopup(modalOpened);
   }
-});
+}
 
-// ------------------------closes modal by overlay---------------------------------------------
-document.addEventListener("click", (event) => {
-  if (!event.target.matches(".modal")) {
-    closePopup(popup);
+function closePopupByEsc(evt) {
+  const modalOpened = document.querySelector(".modal__opened");
+  if (evt.key === "Esc") {
+    closePopup(modalOpened);
   }
-});
+}
+
+picturePopup.addEventListener("keydown", closePopupByEsc(evt));
+picturePopup.addEventListener("click", closePopupByOverlayClick(evt));
