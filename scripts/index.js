@@ -149,6 +149,8 @@ initialCards.forEach(function (item) {
   cardsList.prepend(getCardElement(item));
 });
 
+// ---------------------------close popups by overlay click and Esc key---------------------
+
 function closePopupByOverlayClick(evt) {
   const modalOpened = document.querySelector(".modal__opened");
   if (evt.target.matches(".modal")) {
@@ -163,5 +165,8 @@ function closePopupByEsc(evt) {
   }
 }
 
-picturePopup.addEventListener("keydown", closePopupByEsc(evt));
-picturePopup.addEventListener("click", closePopupByOverlayClick(evt));
+const modals = document.querySelectorAll(".modal");
+modals.forEach((modal) => {
+  modal.addEventListener("keydown", closePopupByEsc(evt));
+  modal.addEventListener("click", closePopupByOverlayClick(evt));
+});
