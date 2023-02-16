@@ -154,15 +154,14 @@ initialCards.forEach(function (item) {
 // ---------------------------close popups by overlay click and Esc key---------------------
 
 function closePopupByOverlayClick(evt) {
-  const modalOpened = document.querySelector(".modal_opened");
   if (evt.target.matches(".modal")) {
-    closePopup(modalOpened);
+    closePopup(evt.target);
   }
 }
 
 function closePopupByEsc(evt) {
-  const modalOpened = document.querySelector(".modal_opened");
   if (evt.key === "Escape") {
+    const modalOpened = document.querySelector(".modal_opened");
     closePopup(modalOpened);
   }
 }
