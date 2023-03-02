@@ -1,3 +1,6 @@
+import FormValidator from "./FormValidator.js";
+import Card from "./Card.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -49,18 +52,11 @@ const pictureButtonReset = picturePopup.querySelector(".modal__button-reset");
 const pictureImageOpen = picturePopup.querySelector(".modal__image-clicked");
 const pictureImageText = picturePopup.querySelector(".modal__image-text");
 
+const cardSelector = document.querySelector("#template");
+
 const cardTemplate = document
   .querySelector(".template")
   .content.querySelector(".card");
-
-function openPopup(popup) {
-  popup.classList.add("modal_opened");
-  document.addEventListener("keydown", closePopupByEsc);
-}
-function closePopup(popup) {
-  popup.classList.remove("modal_opened");
-  document.removeEventListener("keydown", closePopupByEsc);
-}
 
 // ----------opens edit profile button--------------------------------------------------
 
@@ -102,6 +98,26 @@ function handleCardFormSubmit(evt) {
   disableButton(submitButton, config.inactiveButtonClass);
 }
 addCardPopupForm.addEventListener("submit", handleCardFormSubmit);
+// -----------------VALIDATION-------------------------------------------
+const validationSettings = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
+const editFormValidator = new FormValidator(
+  validationSettings,
+  profileFormElement
+);
+const addFormValidator = new FormValidator(
+  validationSettings,
+  addCardPopupForm
+);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 
 // ------------------getCardElement function--------------------------------------------------------
 
@@ -147,24 +163,10 @@ pictureButtonReset.addEventListener("click", () => closePopup(picturePopup));
 // -------------adds initial cards to the page---------------------------------------------
 
 const cardsList = document.querySelector(".cards__list");
-initialCards.forEach(function (item) {
-  cardsList.prepend(getCardElement(item));
+initialCards.forEach((item) => {
+  const card = new Card(item, cardSelector);
+  cardsList.prepend(card.getView()); // getCardElement(item)
 });
-
-// ---------------------------close popups by overlay click and Esc key---------------------
-
-function closePopupByOverlayClick(evt) {
-  if (evt.target.matches(".modal")) {
-    closePopup(evt.target);
-  }
-}
-
-function closePopupByEsc(evt) {
-  if (evt.key === "Escape") {
-    const modalOpened = document.querySelector(".modal_opened");
-    closePopup(modalOpened);
-  }
-}
 
 const modals = document.querySelectorAll(".modal");
 modals.forEach((modal) => {
