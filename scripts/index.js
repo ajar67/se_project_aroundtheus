@@ -164,8 +164,8 @@ pictureButtonReset.addEventListener("click", () => closePopup(picturePopup));
 
 const cardsList = document.querySelector(".cards__list");
 initialCards.forEach((item) => {
-  const card = new Card(item, cardSelector);
-  cardsList.prepend(card.getView()); // getCardElement(item)
+  const card = new Card(item, ".template");
+  cardsList.prepend(card.getView()); 
 });
 
 const modals = document.querySelectorAll(".modal");

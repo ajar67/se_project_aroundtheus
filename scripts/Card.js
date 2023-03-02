@@ -67,7 +67,7 @@ class Card {
   }
 
   getView() {
-    this._element = this._getTemplate;
+    this._element = this._getTemplate();
     this._setEventListeners();
 
     this._element.querySelector(
