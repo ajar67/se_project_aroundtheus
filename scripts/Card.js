@@ -1,3 +1,5 @@
+import { openPopup } from "./utils.js";
+
 const picturePopup = document.querySelector("#picture-popup");
 const pictureButtonReset = picturePopup.querySelector(".modal__button-reset");
 const pictureImageOpen = picturePopup.querySelector(".modal__image-clicked");
@@ -6,12 +8,6 @@ const pictureImageText = picturePopup.querySelector(".modal__image-text");
 function closePopup(popup) {
   popup.classList.remove("modal_opened");
   document.removeEventListener("keydown", closePopupByEsc);
-}
-
-function closePopupByOverlayClick(evt) {
-  if (evt.target.matches(".modal")) {
-    closePopup(evt.target);
-  }
 }
 
 function closePopupByEsc(evt) {
@@ -54,9 +50,9 @@ class Card {
 
   _handlePictureView() {
     openPopup(picturePopup);
-    this._element.querySelector(".card__image").src = data.link;
-    this._element.querySelector(".card__image").alt = data.text;
-    this._element.querySelector(".card__text").textContent = data.text;
+    this._element.querySelector(".card__image").src = this._link;
+    this._element.querySelector(".card__image").alt = this._text;
+    this._element.querySelector(".card__text").textContent = this._text;
   }
 
   _getTemplate() {
