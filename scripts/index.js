@@ -46,18 +46,9 @@ const addCardPopupResetButton = addCardPopup.querySelector(
 const addCardPopupForm = addCardPopup.querySelector(".modal__form");
 const titleInput = document.querySelector("#title");
 const imageInput = document.querySelector("#image");
-const cardText = document.querySelector(".card__text");
 
 const picturePopup = document.querySelector("#picture-popup");
 const pictureButtonReset = picturePopup.querySelector(".modal__button-reset");
-const pictureImageOpen = picturePopup.querySelector(".modal__image-clicked");
-const pictureImageText = picturePopup.querySelector(".modal__image-text");
-
-const cardSelector = document.querySelector("#template");
-
-const cardTemplate = document
-  .querySelector(".template")
-  .content.querySelector(".card");
 
 // ----------opens edit profile button--------------------------------------------------
 
@@ -100,7 +91,6 @@ function handleCardFormSubmit(evt) {
 }
 addCardPopupForm.addEventListener("submit", handleCardFormSubmit);
 
-
 // -----------------VALIDATION-------------------------------------------
 const validationSettings = {
   inputSelector: ".modal__input",
@@ -121,48 +111,6 @@ const addFormValidator = new FormValidator(
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-
-
-
-// ------------------getCardElement function--------------------------------------------------------
-
-function getCardElement(data) {
-  // --------all the variables----------------------------------------
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardText = cardElement.querySelector(".card__text");
-  const cardImage = cardElement.querySelector(".card__image");
-  const cardLikeButton = cardElement.querySelector(".card__like-button");
-  const cardTrashButton = cardElement.querySelector(".card__trash-button");
-  // ------------------------------------------------------
-
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
-  cardText.textContent = data.name;
-
-  // -------------takes care of the like button-------------------------------------
-  cardLikeButton.addEventListener("click", function () {
-    cardLikeButton.classList.toggle("card__like-button_active");
-  });
-
-  // --------------takes care of trash button---------------------------------------------------------
-
-  cardTrashButton.addEventListener("click", function () {
-    cardElement.remove();
-  });
-
-  // --------------opens the image if clicked on it-----------------------------------------------
-
-  cardImage.addEventListener("click", function () {
-    openPopup(picturePopup);
-    pictureImageOpen.src = data.link;
-    pictureImageOpen.alt = data.name;
-    pictureImageText.textContent = data.name;
-  });
-
-  // ---------------reset button on big image------------------------------------------
-
-  return cardElement;
-}
 
 pictureButtonReset.addEventListener("click", () => closePopup(picturePopup));
 // -------------adds initial cards to the page---------------------------------------------

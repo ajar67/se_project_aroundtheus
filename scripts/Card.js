@@ -50,9 +50,9 @@ class Card {
 
   _handlePictureView() {
     openPopup(picturePopup);
-    this._element.querySelector(".card__image").src = this._link;
-    this._element.querySelector(".card__image").alt = this._text;
-    this._element.querySelector(".card__text").textContent = this._text;
+    pictureImageOpen.src = this._link;
+    pictureImageOpen.alt = this._text;
+    pictureImageText.textContent = this._text;
   }
 
   _getTemplate() {
@@ -66,9 +66,7 @@ class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector(
-      ".card__image"
-    ).style.backgroundImage = `url(${this._link})`;
+    this._element.querySelector(".card__image").src = this._link;
     this._element.querySelector(".card__text").textContent = this._text;
     return this._element;
   }
