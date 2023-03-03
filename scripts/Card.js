@@ -25,7 +25,7 @@ function closePopupByEsc(evt) {
 
 class Card {
   constructor(data, cardSelector) {
-    this._text = data.text;
+    this._text = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
   }
@@ -49,7 +49,7 @@ class Card {
   }
 
   _handleTrashButton() {
-    this._element.querySelector(".card__trash-button").remove();
+    this._element.remove();
   }
 
   _handlePictureView() {
@@ -73,7 +73,7 @@ class Card {
     this._element.querySelector(
       ".card__image"
     ).style.backgroundImage = `url(${this._link})`;
-    this._element.querySelector(".card__title").textContent = this._text;
+    this._element.querySelector(".card__text").textContent = this._text;
     return this._element;
   }
 }

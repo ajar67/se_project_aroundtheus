@@ -1,5 +1,6 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
+import { openPopup, closePopup, closePopupByOverlayClick } from "./utils.js";
 
 const initialCards = [
   {
@@ -98,6 +99,8 @@ function handleCardFormSubmit(evt) {
   disableButton(submitButton, config.inactiveButtonClass);
 }
 addCardPopupForm.addEventListener("submit", handleCardFormSubmit);
+
+
 // -----------------VALIDATION-------------------------------------------
 const validationSettings = {
   inputSelector: ".modal__input",
@@ -118,6 +121,8 @@ const addFormValidator = new FormValidator(
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+
+
 
 // ------------------getCardElement function--------------------------------------------------------
 
@@ -165,7 +170,7 @@ pictureButtonReset.addEventListener("click", () => closePopup(picturePopup));
 const cardsList = document.querySelector(".cards__list");
 initialCards.forEach((item) => {
   const card = new Card(item, ".template");
-  cardsList.prepend(card.getView()); 
+  cardsList.prepend(card.getView());
 });
 
 const modals = document.querySelectorAll(".modal");
