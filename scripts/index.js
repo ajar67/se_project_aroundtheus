@@ -81,13 +81,15 @@ addCardPopupResetButton.addEventListener("click", () =>
 
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
-  cardsList.prepend(
-    getCardElement({ link: imageInput.value, name: titleInput.value })
-  );
+  const name = evt.target.titleInput.value;
+  const link = evt.target.imageInput.value;
+  const card = createCard({ name, link });
+  cardsList.prepend(card);
+
   closePopup(addCardPopup);
   evt.target.reset();
-  const submitButton = addCardPopup.querySelector(".modal__button");
-  disableButton(submitButton, config.inactiveButtonClass);
+  //const submitButton = addCardPopup.querySelector(".modal__button");
+  addFormValidator.disableButton;
 }
 addCardPopupForm.addEventListener("submit", handleCardFormSubmit);
 
@@ -116,10 +118,24 @@ pictureButtonReset.addEventListener("click", () => closePopup(picturePopup));
 // -------------adds initial cards to the page---------------------------------------------
 
 const cardsList = document.querySelector(".cards__list");
+//initialCards.forEach((item) => {
+//const card = new Card(item, ".template");
+//cardsList.prepend(card.getView());
+//});
+
+const createCard = (cardData) => {
+  const card = new Card(cardData, ".template");
+  return card.getView();
+};
+
 initialCards.forEach((item) => {
-  const card = new Card(item, ".template");
-  cardsList.prepend(card.getView());
+  cardsList.prepend(createCard(item));
 });
+
+// const createCard = (cardData) => {
+//    const card = new Card(cardData, ".template");
+//    return card.getView();
+//  }
 
 const modals = document.querySelectorAll(".modal");
 modals.forEach((modal) => {
