@@ -81,15 +81,15 @@ addCardPopupResetButton.addEventListener("click", () =>
 
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
-  const name = evt.target.titleInput.value;
-  const link = evt.target.imageInput.value;
+  const name = titleInput.value;
+  const link = imageInput.value;
   const card = createCard({ name, link });
   cardsList.prepend(card);
 
   closePopup(addCardPopup);
   evt.target.reset();
   //const submitButton = addCardPopup.querySelector(".modal__button");
-  addFormValidator.disableButton;
+  addFormValidator.disableButton();
 }
 addCardPopupForm.addEventListener("submit", handleCardFormSubmit);
 
@@ -98,7 +98,7 @@ const validationSettings = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "popup__input_type_error",
+  inputErrorClass: "modal__input_type_error",
   errorClass: "popup__error_visible",
 };
 

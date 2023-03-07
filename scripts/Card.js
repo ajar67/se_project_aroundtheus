@@ -1,15 +1,8 @@
-import { openPopup, closePopup } from "./utils.js";
+import { openPopup } from "./utils.js";
 
 const picturePopup = document.querySelector("#picture-popup");
 const pictureImageOpen = picturePopup.querySelector(".modal__image-clicked");
 const pictureImageText = picturePopup.querySelector(".modal__image-text");
-
-function closePopupByEsc(evt) {
-  if (evt.key === "Escape") {
-    const modalOpened = document.querySelector(".modal_opened");
-    closePopup(modalOpened);
-  }
-}
 
 // -------------------------------------- class Card -----------------------------------------
 
@@ -68,11 +61,11 @@ class Card {
   getView() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._cardImage = this._element.querySelector(".card__image");
-    this._cardText = this._element.querySelector(".card__text");
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._text;
-    this._cardText.textContent = this._text;
+    const cardImage = this._element.querySelector(".card__image");
+    const cardText = this._element.querySelector(".card__text");
+    cardImage.src = this._link;
+    cardImage.alt = this._text;
+    cardText.textContent = this._text;
     return this._element;
   }
 }
