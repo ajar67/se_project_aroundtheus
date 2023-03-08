@@ -28,7 +28,7 @@ class Card {
 
   _handleLikeButton() {
     this._element
-      .querySelector("card__like-button")
+      .querySelector(".card__like-button")
       .classList.toggle("card__like-button_active");
   }
 
@@ -43,13 +43,6 @@ class Card {
     pictureImageOpen.alt = this._text;
     pictureImageText.textContent = this._text;
   }
-
-  /*createCard(){
-    const createCard = (cardData) => {
-      const card = new Card(cardData, ".template");
-      return card.createCard();
-    }
-  }*/
 
   _getTemplate() {
     return document
