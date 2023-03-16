@@ -1,8 +1,6 @@
-import Popup from "./Popup.js";
 
-export default class UserInfo extends Popup {
+export default class UserInfo {
   constructor({ name, job }) {
-    super();
     this._name = name;
     this._job = job;
   }
