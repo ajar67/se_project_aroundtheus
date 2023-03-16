@@ -1,4 +1,4 @@
-import { openPopup } from "./utils.js";
+//import { openPopup } from "./utils.js";
 
 const picturePopup = document.querySelector("#picture-popup");
 const pictureImageOpen = picturePopup.querySelector(".modal__image-clicked");
