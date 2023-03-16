@@ -1,3 +1,5 @@
+import Popup from "./Popup.js";
+
 export default class UserInfo extends Popup {
   constructor({ name, job }) {
     this._name = name;
@@ -24,5 +26,3 @@ export default class UserInfo extends Popup {
     super.close();
   }
 }
-
-// profilePopup.addEventListener("submit", handleProfileModalSubmit);

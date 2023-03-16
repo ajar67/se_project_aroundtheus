@@ -125,7 +125,17 @@ addFormValidator.enableValidation();
 const cardsList = document.querySelector(".cards__list");
 
 const createCard = (cardData) => {
-  const card = new Card(cardData, ".template");
+  const card = new Card(cardData, ".template", (data) => {
+    const picturePopup = document.querySelector("#picture-popup");
+    const pictureImageOpen = picturePopup.querySelector(
+      ".modal__image-clicked"
+    );
+    const pictureImageText = picturePopup.querySelector(".modal__image-text");
+    openPopup(picturePopup);
+    pictureImageOpen.src = data.link;
+    pictureImageOpen.alt = data.name;
+    pictureImageText.textContent = data.name;
+  });
   return card.getView();
 };
 
