@@ -143,10 +143,10 @@ initialCards.forEach((item) => {
   cardsList.prepend(createCard(item));
 });
 
-const modals = document.querySelectorAll(".modal");
+/*const modals = document.querySelectorAll(".modal");
 modals.forEach((modal) => {
   modal.addEventListener("click", closePopupByOverlayClick);
-});
+});*/
 
 const newProfilePopup = new PopupWithForm("#profile-popup", (evt) => {
   evt.preventDefault();
