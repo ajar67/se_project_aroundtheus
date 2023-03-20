@@ -1,7 +1,7 @@
-import FormValidator from "./FormValidator.js";
-import Card from "./Card.js";
-import PopupWithForm from "./PopupWithForm.js";
-import UserInfo from "./UserInfo.js";
+import FormValidator from "../scripts/FormValidator.js";
+import Card from "../scripts/Card.js";
+import PopupWithForm from "../scripts/PopupWithForm.js";
+import UserInfo from "../scripts/UserInfo.js";
 import "../pages/index.css";
 
 const initialCards = [
@@ -60,9 +60,6 @@ const pictureButtonReset = picturePopup.querySelector(".modal__button-reset");
 //   nameInput.value = profileName.textContent;
 //   jobInput.value = profileJob.textContent;
 // }
-// profileEditButton.addEventListener("click", openProfileModal);
-// profileButtonReset.addEventListener("click", () => closePopup(profilePopup));
-
 // function handleProfileModalSubmit(evt) {
 //   evt.preventDefault();
 //   profileName.textContent = nameInput.value;
@@ -70,11 +67,6 @@ const pictureButtonReset = picturePopup.querySelector(".modal__button-reset");
 //   closePopup(profilePopup);
 // }
 // profilePopup.addEventListener("submit", handleProfileModalSubmit);
-
-// profileAddButton.addEventListener("click", () => openPopup(addCardPopup));
-// addCardPopupResetButton.addEventListener("click", () =>
-//   closePopup(addCardPopup)
-// );
 
 //--------------------------------------------------------------------------------------------
 //------------------------------popupwithform.js----------------------------------------------
@@ -94,6 +86,14 @@ const pictureButtonReset = picturePopup.querySelector(".modal__button-reset");
 //   addFormValidator.disableButton();
 // }
 //addCardPopupForm.addEventListener("submit", handleCardFormSubmit);
+
+/*const modals = document.querySelectorAll(".modal");
+modals.forEach((modal) => {
+  modal.addEventListener("click", closePopupByOverlayClick);
+});*/
+
+//pictureButtonReset.addEventListener("click", () => closePopup(picturePopup));
+// -------------adds initial cards to the page---------------------------------------------
 
 // -----------------VALIDATION-------------------------------------------
 // -----------------VALIDATION-------------------------------------------
@@ -120,9 +120,6 @@ const addFormValidator = new FormValidator(
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-//pictureButtonReset.addEventListener("click", () => closePopup(picturePopup));
-// -------------adds initial cards to the page---------------------------------------------
-
 const cardsList = document.querySelector(".cards__list");
 
 const createCard = (cardData) => {
@@ -143,11 +140,6 @@ const createCard = (cardData) => {
 initialCards.forEach((item) => {
   cardsList.prepend(createCard(item));
 });
-
-/*const modals = document.querySelectorAll(".modal");
-modals.forEach((modal) => {
-  modal.addEventListener("click", closePopupByOverlayClick);
-});*/
 
 const newProfilePopup = new PopupWithForm("#profile-popup", (evt) => {
   evt.preventDefault();
@@ -178,3 +170,9 @@ const newUserInfo = new UserInfo({
   job: profileJob.textContent,
 });
 profilePopup.addEventListener("submit", newUserInfo.setUserInfo);
+
+profileAddButton.addEventListener("click", () => newCardPopup.open());
+addCardPopupResetButton.addEventListener("click", () => newCardPopup.close());
+
+profileEditButton.addEventListener("click", () => newProfilePopup.open());
+profileButtonReset.addEventListener("click", () => newProfilePopup.close());
