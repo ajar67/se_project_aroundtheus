@@ -16,7 +16,10 @@ import {
   addCardPopupResetButton,
   addCardPopupForm,
   picturePopup,
+  nameInput,
+  jobInput,
 } from "../utils/constants.js";
+import Popup from "../scripts/Popup.js";
 
 /*const initialCards = [
   {
@@ -155,19 +158,16 @@ initialCards.forEach((item) => {
 
 const newProfilePopup = new PopupWithForm("#profile-popup", (evt) => {
   evt.preventDefault();
-  //const titleInput = this._popupForm.querySelector("#title").value;
-  //const imageInput = this._popupForm.querySelector("#image").value;
-  //const cardsList = document.querySelector(".cards__list");
+
   evt.target.reset();
   addFormValidator.disableButton();
 });
 
 const newCardPopup = new PopupWithForm("#add-card-popup", (evt) => {
   evt.preventDefault();
-  const titleInput = this._popupForm.querySelector("#title").value;
-  const imageInput = this._popupForm.querySelector("#image").value;
+  const titleInput = document.querySelector("#title").value;
+  const imageInput = document.querySelector("#image").value;
   const cardsList = document.querySelector(".cards__list");
-
   const card = createCard({ name: titleInput, link: imageInput });
   cardsList.prepend(card);
   evt.target.reset();
@@ -175,9 +175,11 @@ const newCardPopup = new PopupWithForm("#add-card-popup", (evt) => {
 });
 
 const newUserInfo = new UserInfo({
-  name: profileName.textContent,
-  job: profileJob.textContent,
+  name: nameInput.value,
+  job: jobInput.value,
 });
+
+newCardPopup.setEventListeners();
 profilePopup.addEventListener("submit", newUserInfo.setUserInfo);
 
 profileAddButton.addEventListener("click", () => newCardPopup.open());

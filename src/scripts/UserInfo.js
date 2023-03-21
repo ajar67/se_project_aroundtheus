@@ -1,3 +1,4 @@
+import { profileJob, profileName } from "../utils/constants";
 
 export default class UserInfo {
   constructor({ name, job }) {
@@ -16,11 +17,10 @@ export default class UserInfo {
     return profileInputsObject;
   }
 
-  setUserInfo(evt) {
-    const profileName = document.querySelector(".profile__title");
-    const profileJob = document.querySelector(".profile__description");
+  setUserInfo = (evt) => {
     evt.preventDefault();
-    profileName.textContent = this._name.value;
-    profileJob.textContent = this._job.value;
+    profileName.textContent = this._name;
+    profileJob.textContent = this._job;
+    
   }
 }
