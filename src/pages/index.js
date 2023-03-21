@@ -3,8 +3,22 @@ import Card from "../scripts/Card.js";
 import PopupWithForm from "../scripts/PopupWithForm.js";
 import UserInfo from "../scripts/UserInfo.js";
 import "../pages/index.css";
+import {
+  initialCards,
+  profileEditButton,
+  profilePopup,
+  profileFormElement,
+  profileButtonReset,
+  profileName,
+  profileJob,
+  profileAddButton,
+  addCardPopup,
+  addCardPopupResetButton,
+  addCardPopupForm,
+  picturePopup,
+} from "../utils/constants.js";
 
-const initialCards = [
+/*const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -29,28 +43,28 @@ const initialCards = [
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
-];
+];*/
 
-const profileEditButton = document.querySelector(".profile__edit-button");
-const profilePopup = document.querySelector("#profile-popup");
-const profileFormElement = profilePopup.querySelector(".modal__form");
-const profileButtonReset = profilePopup.querySelector(".modal__button-reset");
-const nameInput = document.querySelector("#name");
-const jobInput = document.querySelector("#description");
-const profileName = document.querySelector(".profile__title");
-const profileJob = document.querySelector(".profile__description");
-const profileAddButton = document.querySelector(".profile__add-button");
+// const profileEditButton = document.querySelector(".profile__edit-button");
+// const profilePopup = document.querySelector("#profile-popup");
+// const profileFormElement = profilePopup.querySelector(".modal__form");
+// const profileButtonReset = profilePopup.querySelector(".modal__button-reset");
+// const nameInput = document.querySelector("#name");
+// const jobInput = document.querySelector("#description");
+// const profileName = document.querySelector(".profile__title");
+// const profileJob = document.querySelector(".profile__description");
+// const profileAddButton = document.querySelector(".profile__add-button");
 
-const addCardPopup = document.querySelector("#add-card-popup");
-const addCardPopupResetButton = addCardPopup.querySelector(
-  ".modal__button-reset"
-);
-const addCardPopupForm = addCardPopup.querySelector(".modal__form");
-const titleInput = document.querySelector("#title");
-const imageInput = document.querySelector("#image");
+// const addCardPopup = document.querySelector("#add-card-popup");
+// const addCardPopupResetButton = addCardPopup.querySelector(
+//   ".modal__button-reset"
+// );
+// const addCardPopupForm = addCardPopup.querySelector(".modal__form");
+// const titleInput = document.querySelector("#title");
+// const imageInput = document.querySelector("#image");
 
-const picturePopup = document.querySelector("#picture-popup");
-const pictureButtonReset = picturePopup.querySelector(".modal__button-reset");
+// const picturePopup = document.querySelector("#picture-popup");
+// const pictureButtonReset = picturePopup.querySelector(".modal__button-reset");
 
 // ----------opens edit profile button--------------------------------------------------
 //-----------------------------userinfo.js----------------------------------------------
@@ -66,7 +80,6 @@ const pictureButtonReset = picturePopup.querySelector(".modal__button-reset");
 //   profileJob.textContent = jobInput.value;
 //   closePopup(profilePopup);
 // }
-// profilePopup.addEventListener("submit", handleProfileModalSubmit);
 
 //--------------------------------------------------------------------------------------------
 //------------------------------popupwithform.js----------------------------------------------
@@ -85,7 +98,6 @@ const pictureButtonReset = picturePopup.querySelector(".modal__button-reset");
 //   //const submitButton = addCardPopup.querySelector(".modal__button");
 //   addFormValidator.disableButton();
 // }
-//addCardPopupForm.addEventListener("submit", handleCardFormSubmit);
 
 /*const modals = document.querySelectorAll(".modal");
 modals.forEach((modal) => {
@@ -143,12 +155,9 @@ initialCards.forEach((item) => {
 
 const newProfilePopup = new PopupWithForm("#profile-popup", (evt) => {
   evt.preventDefault();
-  const titleInput = this._popupForm.querySelector("#title").value;
-  const imageInput = this._popupForm.querySelector("#image").value;
-  const cardsList = document.querySelector(".cards__list");
-
-  const card = createCard({ name: titleInput, link: imageInput });
-  cardsList.prepend(card);
+  //const titleInput = this._popupForm.querySelector("#title").value;
+  //const imageInput = this._popupForm.querySelector("#image").value;
+  //const cardsList = document.querySelector(".cards__list");
   evt.target.reset();
   addFormValidator.disableButton();
 });

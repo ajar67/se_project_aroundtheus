@@ -22,6 +22,5 @@ export default class UserInfo {
     evt.preventDefault();
     profileName.textContent = this._name.value;
     profileJob.textContent = this._job.value;
-    super.close();
   }
 }

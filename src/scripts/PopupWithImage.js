@@ -8,11 +8,12 @@ export default class PopupWithImage extends Popup {
   }
 
   open() {
+    super.open();
     const imageOpen = this._popupForm.querySelector(".modal__image-clicked");
     const imageText = this._popupForm.querySelector(".modal__image-text");
     imageOpen.src = this._link;
     imageText.alt = this._text;
     imageText.textContent = this._text;
-    super.open();
+    
   }
 }
