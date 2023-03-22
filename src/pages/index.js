@@ -1,7 +1,7 @@
-import FormValidator from "../scripts/FormValidator.js";
-import Card from "../scripts/Card.js";
-import PopupWithForm from "../scripts/PopupWithForm.js";
-import UserInfo from "../scripts/UserInfo.js";
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js.js.js.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
 import {
   initialCards,
@@ -19,7 +19,7 @@ import {
   nameInput,
   jobInput,
 } from "../utils/constants.js";
-import Popup from "../scripts/Popup.js";
+import Popup from "../components/Popup.js";
 
 /*const initialCards = [
   {
@@ -158,9 +158,10 @@ initialCards.forEach((item) => {
 
 const newProfilePopup = new PopupWithForm("#profile-popup", (evt) => {
   evt.preventDefault();
-
+  newUserInfo.setUserInfo();
   evt.target.reset();
   addFormValidator.disableButton();
+  
 });
 
 const newCardPopup = new PopupWithForm("#add-card-popup", (evt) => {
@@ -175,15 +176,12 @@ const newCardPopup = new PopupWithForm("#add-card-popup", (evt) => {
 });
 
 const newUserInfo = new UserInfo({
-  name: nameInput.value,
+  name: profileName.textContent,
   job: jobInput.value,
 });
 
 newCardPopup.setEventListeners();
-profilePopup.addEventListener("submit", newUserInfo.setUserInfo);
+newProfilePopup.setEventListeners();
 
 profileAddButton.addEventListener("click", () => newCardPopup.open());
-addCardPopupResetButton.addEventListener("click", () => newCardPopup.close());
-
 profileEditButton.addEventListener("click", () => newProfilePopup.open());
-profileButtonReset.addEventListener("click", () => newProfilePopup.close());

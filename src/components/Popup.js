@@ -19,8 +19,7 @@ export default class Popup {
     }
   };
 
-  setEventListeners(evt) {
-    evt.preventDefault();
+  setEventListeners() {
     const modalButtonReset = this._popupElement.querySelector(
       ".modal__button-reset"
     );
