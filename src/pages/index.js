@@ -136,15 +136,19 @@ editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
 const cardsList = document.querySelector(".cards__list");
-
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 const createCard = (cardData) => {
-  const card = new Card(cardData, ".template", /*(data) => {
+  const card = new Card(
+    cardData,
+    ".template" /*(data) => {
     const newPopupImage = new PopupWithImage("#picture-popup", data);
     newPopupImage.open();
-  }*/  
-   // or
-   
-   /*(data) => {
+  }*/
+    // or
+
+    /*(data) => {
     const picturePopup = document.querySelector("#picture-popup");
     console.log(picturePopup);
     const pictureImageOpen = picturePopup.querySelector(
@@ -156,7 +160,8 @@ const createCard = (cardData) => {
     pictureImageOpen.alt = data.name;
     pictureImageText.textContent = data.name;
     // not opening the modal
-  }*/);
+  }*/
+  );
   return card.getView();
 };
 
@@ -164,22 +169,22 @@ initialCards.forEach((item) => {
   cardsList.prepend(createCard(item));
 });
 
-const newProfilePopup = new PopupWithForm("#profile-popup", (evt) => {
-  evt.preventDefault();
+const newProfilePopup = new PopupWithForm("#profile-popup", () => {
+  //evt.preventDefault();
   newUserInfo.setUserInfo();
-  evt.target.reset();
+  //evt.target.reset();
   addFormValidator.disableButton();
   //close modal
 });
 
-const newCardPopup = new PopupWithForm("#add-card-popup", (evt) => {
-  evt.preventDefault();
+const newCardPopup = new PopupWithForm("#add-card-popup", () => {
+  //evt.preventDefault();
   const titleInput = document.querySelector("#title").value;
   const imageInput = document.querySelector("#image").value;
   const cardsList = document.querySelector(".cards__list");
   const card = createCard({ name: titleInput, link: imageInput });
   cardsList.prepend(card);
-  evt.target.reset();
+  //evt.target.reset();
   addFormValidator.disableButton();
   //close modal
 });

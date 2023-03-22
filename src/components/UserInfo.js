@@ -1,4 +1,9 @@
-import { profileJob, profileName, nameInput, jobInput } from "../utils/constants";
+import {
+  profileJob,
+  profileName,
+  nameInput,
+  jobInput,
+} from "../utils/constants";
 
 export default class UserInfo {
   constructor({ name, job }) {
