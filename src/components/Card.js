@@ -20,10 +20,10 @@ class Card {
     this._element
       .querySelector(".card__trash-button")
       .addEventListener("click", () => this._handleTrashButton());
-      
+
     this._element
       .querySelector(".card__image")
-      .addEventListener("click", () => this._handleCardClick);
+      .addEventListener("click", this._handleCardClick);
   }
 
   _handleLikeButton() {

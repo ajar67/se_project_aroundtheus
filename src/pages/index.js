@@ -1,5 +1,5 @@
 import FormValidator from "../components/FormValidator.js";
-import Card from "../components/Card.js.js.js.js";
+import Card from "../components/Card.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
@@ -19,7 +19,7 @@ import {
   nameInput,
   jobInput,
 } from "../utils/constants.js";
-import Popup from "../components/Popup.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 /*const initialCards = [
   {
@@ -138,8 +138,15 @@ addFormValidator.enableValidation();
 const cardsList = document.querySelector(".cards__list");
 
 const createCard = (cardData) => {
-  const card = new Card(cardData, ".template", (data) => {
+  const card = new Card(cardData, ".template", /*(data) => {
+    const newPopupImage = new PopupWithImage("#picture-popup", data);
+    newPopupImage.open();
+  }*/  
+   // or
+   
+   /*(data) => {
     const picturePopup = document.querySelector("#picture-popup");
+    console.log(picturePopup);
     const pictureImageOpen = picturePopup.querySelector(
       ".modal__image-clicked"
     );
@@ -148,7 +155,8 @@ const createCard = (cardData) => {
     pictureImageOpen.src = data.link;
     pictureImageOpen.alt = data.name;
     pictureImageText.textContent = data.name;
-  });
+    // not opening the modal
+  }*/);
   return card.getView();
 };
 
@@ -161,7 +169,7 @@ const newProfilePopup = new PopupWithForm("#profile-popup", (evt) => {
   newUserInfo.setUserInfo();
   evt.target.reset();
   addFormValidator.disableButton();
-  
+  //close modal
 });
 
 const newCardPopup = new PopupWithForm("#add-card-popup", (evt) => {
@@ -173,11 +181,12 @@ const newCardPopup = new PopupWithForm("#add-card-popup", (evt) => {
   cardsList.prepend(card);
   evt.target.reset();
   addFormValidator.disableButton();
+  //close modal
 });
 
 const newUserInfo = new UserInfo({
   name: profileName.textContent,
-  job: jobInput.value,
+  job: profileJob.textContent,
 });
 
 newCardPopup.setEventListeners();
