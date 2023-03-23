@@ -18,6 +18,7 @@ import {
   picturePopup,
   nameInput,
   jobInput,
+  cardsList,
 } from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 
@@ -135,33 +136,16 @@ const addFormValidator = new FormValidator(
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-const cardsList = document.querySelector(".cards__list");
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-const createCard = (cardData) => {
-  const card = new Card(
-    cardData,
-    ".template" /*(data) => {
-    const newPopupImage = new PopupWithImage("#picture-popup", data);
-    newPopupImage.open();
-  }*/
-    // or
 
-    /*(data) => {
-    const picturePopup = document.querySelector("#picture-popup");
-    console.log(picturePopup);
-    const pictureImageOpen = picturePopup.querySelector(
-      ".modal__image-clicked"
-    );
-    const pictureImageText = picturePopup.querySelector(".modal__image-text");
-    openPopup(picturePopup);
-    pictureImageOpen.src = data.link;
-    pictureImageOpen.alt = data.name;
-    pictureImageText.textContent = data.name;
-    // not opening the modal
-  }*/
-  );
+const newPopupImage = new PopupWithImage({ popupSelector: "#picture-popup" });
+
+const createCard = (cardData) => {
+  const card = new Card(cardData, ".template", (data) => {
+    newPopupImage.open(data);
+  });
   return card.getView();
 };
 

@@ -1,9 +1,3 @@
-// const picturePopup = document.querySelector("#picture-popup");
-// const pictureImageOpen = picturePopup.querySelector(".modal__image-clicked");
-// const pictureImageText = picturePopup.querySelector(".modal__image-text");
-
-// -------------------------------------- class Card -----------------------------------------
-
 class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._text = data.name;
@@ -23,7 +17,9 @@ class Card {
 
     this._element
       .querySelector(".card__image")
-      .addEventListener("click", this._handleCardClick);
+      .addEventListener("click", () =>
+        this._handleCardClick({ name: this._text, link: this._link })
+      );
   }
 
   _handleLikeButton() {
@@ -36,13 +32,6 @@ class Card {
     this._element.remove();
     this._element = null;
   }
-
-  // _handlePictureView() {
-  //   openPopup(picturePopup);
-  //   pictureImageOpen.src = this._link;
-  //   pictureImageOpen.alt = this._text;
-  //   pictureImageText.textContent = this._text;
-  // }
 
   _getTemplate() {
     return document

@@ -48,4 +48,4 @@ export const titleInput = document.querySelector("#title");
 export const imageInput = document.querySelector("#image");
 
 export const picturePopup = document.querySelector("#picture-popup");
-
+export const cardsList = document.querySelector(".cards__list");
