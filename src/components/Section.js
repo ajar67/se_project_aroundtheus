@@ -1,17 +1,18 @@
-class Section {
-  constructor({ items, renderer }, classSelector) {
-    this._items = items; // is an array
-    this._renderer = renderer; // a function that renders and item on the page
-    this._classSelector = document.querySelector(classSelector);
+export default class Section {
+  constructor({ items, renderer }, container) {
+    this._items = items;
+    this._renderer = renderer;
+    this._container = document.querySelector(container);
   }
 
   renderItems() {
     this._items.forEach((item) => {
-      this._renderer(item);
+      const test = this._renderer(item);
+      this.addItem(test);
     });
   }
 
-  addItems(element) {
-    this.classSelector.prepend(element);
+  addItem(element) {
+    this._container.prepend(element);
   }
 }

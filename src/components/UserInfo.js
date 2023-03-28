@@ -1,29 +1,21 @@
-import {
-  profileJob,
-  profileName,
-  nameInput,
-  jobInput,
-} from "../utils/constants";
-
 export default class UserInfo {
   constructor({ name, job }) {
-    this._name = name;
-    this._job = job;
+    this._nameElement = name;
+    this._jobElement = job;
   }
 
   getUserInfo() {
-    const profileInputs = document
-      .querySelector("#profile-popup")
-      .content.querySelector(".modal__input");
-    const profileInputsObject = {};
-    profileInputs.forEach((input) => {
-      profileInputsObject[input.name] = input.value;
-    });
-    return profileInputsObject;
+    const userData = {
+      name: this._nameElement.textContent,
+      description: this._jobElement.textContent,
+    };
+    return userData;
   }
 
-  setUserInfo() {
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
+  setUserInfo(name, job) {
+    const profileName = document.querySelector(".profile__title");
+    const profileJob = document.querySelector(".profile__description");
+    profileName.textContent = name;
+    profileJob.textContent = job;
   }
 }

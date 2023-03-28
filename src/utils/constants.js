@@ -49,3 +49,10 @@ export const imageInput = document.querySelector("#image");
 
 export const picturePopup = document.querySelector("#picture-popup");
 export const cardsList = document.querySelector(".cards__list");
+export const validationSettings = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "popup__error_visible",
+};

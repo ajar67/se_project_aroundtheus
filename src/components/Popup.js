@@ -25,7 +25,7 @@ export default class Popup {
     );
     modalButtonReset.addEventListener("click", () => this.close());
 
-    document.addEventListener("click", (evt) => {
+    this._popupElement.addEventListener("click", (evt) => {
       if (evt.target.matches(".modal")) {
         this.close();
       }
