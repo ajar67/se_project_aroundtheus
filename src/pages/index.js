@@ -85,8 +85,8 @@ const newCardPopup = new PopupWithForm("#add-card-popup", (inputValues) => {
 });
 
 const newUserInfo = new UserInfo({
-  name: profileName.textContent,
-  job: profileJob.textContent,
+  nameSelector: ".profile__title",
+  jobSelector: ".profile__description",
 });
 
 newCardPopup.setEventListeners();
@@ -96,7 +96,10 @@ profileAddButton.addEventListener("click", () => {
   newCardPopup.open();
   addFormValidator.disableButton();
 });
-profileEditButton.addEventListener("click", (inputValues) => {
+profileEditButton.addEventListener("click", () => {
   newProfilePopup.open();
+  const userData = newUserInfo.getUserInfo();
+  nameInput.value = userData.name;
+  jobInput.value = userData.description;
   addFormValidator.disableButton();
 });
