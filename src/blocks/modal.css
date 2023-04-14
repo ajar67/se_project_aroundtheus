@@ -22,6 +22,15 @@
   width: 430px;
 }
 
+#delete-card .modal__container {
+  position: relative;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  height: 181px;
+  width: 430px;
+}
+
 .modal_opened {
   visibility: visible;
   opacity: 1;
@@ -42,6 +51,11 @@
   line-height: 29px;
   width: 330px;
   height: 23px;
+}
+
+#delete-card .modal__title {
+  margin-top: 34px;
+  margin-bottom: 38px;
 }
 
 .modal__input {
@@ -84,6 +98,11 @@
   margin-bottom: 36.5px;
   cursor: pointer;
   font-family: "Inter", sans-serif;
+}
+
+#delete-card .modal__button {
+  height: 50px;
+  margin-top: 0px;
 }
 
 .modal__button_disabled {

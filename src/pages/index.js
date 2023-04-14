@@ -8,6 +8,7 @@ import {
   profileEditButton,
   profilePopup,
   profileFormElement,
+  profileImage,
   profileButtonReset,
   profileName,
   profileJob,
@@ -20,6 +21,7 @@ import {
   jobInput,
   cardsList,
   validationSettings,
+  trashButton,
 } from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
@@ -83,7 +85,16 @@ const newCardPopup = new PopupWithForm("#add-card-popup", (inputValues) => {
   const card = createCard({ name: inputValues.title, link: inputValues.image });
   newCardSection.addItem(card);
 });
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const newDeletePopup = new PopupWithForm("#delete-card", () => {});
+newDeletePopup.setEventListeners();
+newDeletePopup.open();
 
+const newProfilePicture = new PopupWithForm(
+  "#change-profile-picture",
+  (inputValue) => {}
+);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const newUserInfo = new UserInfo({
   nameSelector: ".profile__title",
   jobSelector: ".profile__description",
@@ -103,3 +114,8 @@ profileEditButton.addEventListener("click", () => {
   jobInput.value = userData.description;
   addFormValidator.disableButton();
 });
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+
+// ------------------------- API ------------------------------------------
+//profileImage.addEventListener

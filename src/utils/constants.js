@@ -56,3 +56,5 @@ export const validationSettings = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "popup__error_visible",
 };
+export const profileImage = document.querySelector(".profile__image");
+export const trashButton = document.querySelector(".card__trash-button");

@@ -130,6 +130,47 @@
       </div>
     </div>
 
+    <div class="modal" id="delete-card">
+      <div class="modal__container">
+        <button type="reset" class="modal__button-reset">
+          <img
+            src="<%=require('./images/close.svg')%>"
+            alt="Close image"
+            class="modal__image-close"
+          />
+        </button>
+        <form class="modal__form">
+          <h2 class="modal__title">Are you sure?</h2>
+          <button type="submit" class="modal__button" disabled>Yes</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="change-profile-pic">
+      <div class="modal__container">
+        <button type="reset" class="modal__button-reset">
+          <img
+            src="<%=require('./images/close.svg')%>"
+            alt="Close image"
+            class="modal__image-close"
+          />
+        </button>
+        <form class="modal__form">
+          <h2 class="modal__title">Change profile picture</h2>
+          <input
+            type="url"
+            class="modal__input"
+            id="image"
+            name="image"
+            placeholder="Profile Picture URL"
+            required
+          />
+          <span class="modal__error" id="image-error"></span>
+          <button type="submit" class="modal__button" disabled>Save</button>
+        </form>
+      </div>
+    </div>
+
     <template id="template" class="template">
       <li class="card">
         <button type="button" class="card__trash-button"></button>

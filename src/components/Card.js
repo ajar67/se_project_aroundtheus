@@ -29,8 +29,15 @@ class Card {
   }
 
   _handleTrashButton() {
-    this._element.remove();
-    this._element = null;
+    //document.querySelector("#delete-card").classList.add("modal_opened");
+    document
+      .querySelector("#delete-card")
+      .querySelector(".modal__button")
+      .addEventListener("click", () => {
+        console.log(this._element);
+        this._element.remove();
+        this._element = null;
+      });
   }
 
   _getTemplate() {
