@@ -1,18 +1,15 @@
-class Api {
-  constructor(name, about, cardName, link, avatar) {
-    this._name = name;
-    this._about = about;
-    this._cardName = cardName;
-    this._link = link;
-    this._avatar = avatar;
+export default class Api {
+  constructor() {
+    this._baseUrl = "https://around.nomoreparties.co/v1/group-12/";
+    this._header = {
+      authorization: "3d5d45c7-6b7d-40fa-b3ac-6d464d71f592",
+      "Content-Type": "application/json",
+    };
   }
 
   getUserInformation() {
-    fetch("https://around.nomoreparties.co/v1/group-12/users/me", {
-      headers: {
-        authorization: "3d5d45c7-6b7d-40fa-b3ac-6d464d71f592",
-        "Content-Type": "application/json",
-      },
+    fetch(`${this._baseUrl}users/me`, {
+      headers: this._header,
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -22,11 +19,8 @@ class Api {
   }
 
   getInitialCards() {
-    fetch("https://around.nomoreparties.co/v1/group-12/cards", {
-      headers: {
-        authorization: "3d5d45c7-6b7d-40fa-b3ac-6d464d71f592",
-        "Content-Type": "application/json",
-      },
+    fetch(`${this._baseUrl}cards`, {
+      headers: this._header,
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -35,16 +29,13 @@ class Api {
     });
   }
 
-  _editProfile() {
-    fetch("https://around.nomoreparties.co/v1/group-12/users/me", {
+  editProfile(name, about) {
+    fetch(`${this._baseUrl}users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: "3d5d45c7-6b7d-40fa-b3ac-6d464d71f592",
-        "Content-Type": "application/json",
-      },
+      headers: this._header,
       body: JSON.stringify({
-        name: this._name,
-        about: this._about,
+        name,
+        about,
       }),
     }).then((res) => {
       if (res.ok) {
@@ -54,16 +45,13 @@ class Api {
     });
   }
 
-  _addNewCard() {
-    fetch("https://around.nomoreparties.co/v1/group-12/cards", {
+  addNewCard(name, link) {
+    fetch(`${this._baseUrl}cards`, {
       method: "POST",
-      headers: {
-        authorization: "3d5d45c7-6b7d-40fa-b3ac-6d464d71f592",
-        "Content-Type": "application/json",
-      },
+      headers: this._header,
       body: JSON.stringify({
-        name: this._cardName,
-        link: this._link,
+        name,
+        link,
       }),
     }).then((res) => {
       if (res.ok) {
@@ -73,13 +61,10 @@ class Api {
     });
   }
 
-  _deleteCard(id) {
-    fetch(`https://around.nomoreparties.co/v1/group-12/cards/${id}`, {
+  deleteCard(id) {
+    fetch(`${this._baseUrl}cards/${id}`, {
       method: "DELETE",
-      headers: {
-        authorization: "3d5d45c7-6b7d-40fa-b3ac-6d464d71f592",
-        "Content-Type": "application/json",
-      },
+      headers: this._header,
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -88,15 +73,12 @@ class Api {
     });
   }
 
-  _updateProfPic() {
-    fetch("https://around.nomoreparties.co/v1/group-12/users/me/avatar", {
+  updateProfPic(avatar) {
+    fetch(`${this._baseUrl}users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: "3d5d45c7-6b7d-40fa-b3ac-6d464d71f592",
-        "Content-Type": "application/json",
-      },
+      headers: this._header,
       body: JSON.stringify({
-        avatar: this._avatar,
+        avatar,
       }),
     }).then((res) => {
       if (res.ok) {

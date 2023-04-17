@@ -22,9 +22,11 @@ import {
   cardsList,
   validationSettings,
   trashButton,
+  profileImageButton,
 } from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
+import Api from "../components/Api.js";
 
 const editFormValidator = new FormValidator(
   validationSettings,
@@ -63,10 +65,19 @@ formValidators['profile-form'].resetValidation();*/
 const newPopupImage = new PopupWithImage({ popupSelector: "#picture-popup" });
 newPopupImage.setEventListeners();
 
+const handleDeleteClick = (card) => {
+  const newDeletePopup = new PopupWithForm ("#delete-card", () => {});
+  newDeletePopup.open();
+  newDeletePopup.setEventListeners();
+  
+  //api.deleteCard(card.id);
+};
+
 const createCard = (cardData) => {
   const card = new Card(cardData, ".template", (data) => {
     newPopupImage.open(data);
-  });
+  },
+  handleDeleteClick);
   return card.getView();
 };
 
@@ -86,14 +97,24 @@ const newCardPopup = new PopupWithForm("#add-card-popup", (inputValues) => {
   newCardSection.addItem(card);
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const newDeletePopup = new PopupWithForm("#delete-card", () => {});
-newDeletePopup.setEventListeners();
-newDeletePopup.open();
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const newProfilePicture = new PopupWithForm(
-  "#change-profile-picture",
-  (inputValue) => {}
+  "#change-profile-pic",
+  (inputValue) => {
+    //has to change the picture of the profile section
+    //change the innerHTML source maybe try it out
+    profileImage.src = inputValue;
+    console.log(inputValue);
+  }
 );
+
+profileImageButton.addEventListener("click", () => {
+  newProfilePicture.open();
+  newProfilePicture.setEventListeners();
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const newUserInfo = new UserInfo({
   nameSelector: ".profile__title",
@@ -114,8 +135,11 @@ profileEditButton.addEventListener("click", () => {
   jobInput.value = userData.description;
   addFormValidator.disableButton();
 });
-///////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////
 
-// ------------------------- API ------------------------------------------
-//profileImage.addEventListener
+///////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//API
+
+/*const api = new Api;
+api.getInitialCards();
+api.getUserInformation();*/

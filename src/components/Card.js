@@ -1,9 +1,10 @@
 class Card {
-  constructor(data, cardSelector, handleCardClick) {
+  constructor(data, cardSelector, handleCardClick, handleDeleteCard) {
     this._text = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteCard = handleDeleteCard;
   }
 
   _setEventListeners() {
@@ -13,7 +14,7 @@ class Card {
 
     this._element
       .querySelector(".card__trash-button")
-      .addEventListener("click", () => this._handleTrashButton());
+      .addEventListener("click", () => this._handleDeleteCard(this));
 
     this._element
       .querySelector(".card__image")
@@ -26,18 +27,6 @@ class Card {
     this._element
       .querySelector(".card__like-button")
       .classList.toggle("card__like-button_active");
-  }
-
-  _handleTrashButton() {
-    //document.querySelector("#delete-card").classList.add("modal_opened");
-    document
-      .querySelector("#delete-card")
-      .querySelector(".modal__button")
-      .addEventListener("click", () => {
-        console.log(this._element);
-        this._element.remove();
-        this._element = null;
-      });
   }
 
   _getTemplate() {

@@ -31,6 +31,15 @@
   width: 430px;
 }
 
+#change-profile-pic .modal__container {
+  position: relative;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  height: 272px;
+  width: 430px;
+}
+
 .modal_opened {
   visibility: visible;
   opacity: 1;
@@ -58,6 +67,11 @@
   margin-bottom: 38px;
 }
 
+#change-profile-pic .modal__title {
+  margin-top: 34px;
+  margin-bottom: 54px;
+}
+
 .modal__input {
   font-family: "Inter", sans-serif;
   font-weight: 400;
@@ -69,6 +83,10 @@
   border-top: none;
   border-left: none;
   border-right: none;
+}
+
+#change-profile-pic .modal__input {
+  height: 27px;
 }
 
 .modal__input_type_error {
@@ -105,10 +123,7 @@
   margin-top: 0px;
 }
 
-.modal__button_disabled {
-  background: #ffffff;
-  color: #e5e5e5;
-  cursor: default;
+#change-profile-pic .modal__button {
 }
 
 .modal__button:hover:not(:disabled) {

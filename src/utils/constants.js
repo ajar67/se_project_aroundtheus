@@ -58,3 +58,6 @@ export const validationSettings = {
 };
 export const profileImage = document.querySelector(".profile__image");
 export const trashButton = document.querySelector(".card__trash-button");
+export const profileImageButton = document.querySelector(
+  ".profile__image-button"
+);
