@@ -85,7 +85,7 @@ const newCardSection = new Section(
   { items: initialCards, renderer: createCard },
   ".cards__list"
 );
-newCardSection.renderItems();
+//newCardSection.renderItems();
 
 const newProfilePopup = new PopupWithForm("#profile-popup", (inputValues) => {
   newUserInfo.setUserInfo(inputValues.name, inputValues.description);
@@ -140,6 +140,6 @@ profileEditButton.addEventListener("click", () => {
 //////////////////////////////////////////////////////////////////////
 //API
 
-/*const api = new Api;
+const api = new Api;
 api.getInitialCards();
-api.getUserInformation();*/
+api.getUserInformation();
