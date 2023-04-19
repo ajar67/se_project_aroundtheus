@@ -28,4 +28,8 @@ export default class PopupWithForm extends Popup {
     this._popupForm.reset();
     super.close();
   }
+
+  setSubmitAction(callback) {
+    this._submitCallback = callback;
+  }
 }

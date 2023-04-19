@@ -23,6 +23,11 @@ import {
   validationSettings,
   trashButton,
   profileImageButton,
+  profileTitle,
+  profileDescription,
+  cardLikeNumber,
+  changePicForm,
+  deleteCardForm,
 } from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
@@ -37,8 +42,17 @@ const addFormValidator = new FormValidator(
   addCardPopupForm
 );
 
+const changePicValidator = new FormValidator(validationSettings, changePicForm);
+
+const deleteCardValidator = new FormValidator(
+  validationSettings,
+  deleteCardForm
+);
+
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+changePicValidator.enableValidation();
+deleteCardValidator.enableValidation();
 
 /*const formValidators = {};
 
@@ -65,36 +79,55 @@ formValidators['profile-form'].resetValidation();*/
 const newPopupImage = new PopupWithImage({ popupSelector: "#picture-popup" });
 newPopupImage.setEventListeners();
 
+const newDeletePopup = new PopupWithForm("#delete-card", () => {});
+newDeletePopup.setEventListeners();
+
 const handleDeleteClick = (card) => {
-  const newDeletePopup = new PopupWithForm ("#delete-card", () => {});
+  newDeletePopup.setSubmitAction(() => {
+    api.deleteCard(card.id).then((res) => {
+      console.log(res);
+      newDeletePopup.close();
+    });
+  });
   newDeletePopup.open();
-  newDeletePopup.setEventListeners();
-  
-  //api.deleteCard(card.id);
 };
 
 const createCard = (cardData) => {
-  const card = new Card(cardData, ".template", (data) => {
-    newPopupImage.open(data);
-  },
-  handleDeleteClick);
+  const card = new Card(
+    cardData,
+    ".template",
+    (data) => {
+      newPopupImage.open(data);
+    },
+    handleDeleteClick
+  );
   return card.getView();
 };
 
-const newCardSection = new Section(
-  { items: initialCards, renderer: createCard },
-  ".cards__list"
-);
+// const newCardSection = new Section(
+//   { items: initialCards, renderer: createCard },
+//   ".cards__list"
+// );
 //newCardSection.renderItems();
 
 const newProfilePopup = new PopupWithForm("#profile-popup", (inputValues) => {
   newUserInfo.setUserInfo(inputValues.name, inputValues.description);
   editFormValidator.disableButton();
+  api
+    .editProfile({ name: inputValues.name, about: inputValues.description }) // It doesn't show that it is doing this in the browser
+    .then((res) => {
+      console.log(res);
+    });
 });
 
 const newCardPopup = new PopupWithForm("#add-card-popup", (inputValues) => {
   const card = createCard({ name: inputValues.title, link: inputValues.image });
   newCardSection.addItem(card);
+  api
+    .addNewCard({ name: inputValues.title, link: inputValues.image }) // same thing doesn't show that it is getting to the server
+    .then((res) => {
+      console.log(res);
+    });
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,16 +135,18 @@ const newCardPopup = new PopupWithForm("#add-card-popup", (inputValues) => {
 const newProfilePicture = new PopupWithForm(
   "#change-profile-pic",
   (inputValue) => {
-    //has to change the picture of the profile section
-    //change the innerHTML source maybe try it out
-    profileImage.src = inputValue;
-    console.log(inputValue);
+    changePicValidator.disableButton();
+    newUserInfo.setAvatar(inputValue.image);
+    api
+      .updateProfPic(inputValue.image) // doesn't show that it is getting to the server gotta figure it out
+      .then((res) => {
+        console.log(res);
+      });
   }
 );
 
 profileImageButton.addEventListener("click", () => {
   newProfilePicture.open();
-  newProfilePicture.setEventListeners();
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,10 +154,12 @@ profileImageButton.addEventListener("click", () => {
 const newUserInfo = new UserInfo({
   nameSelector: ".profile__title",
   jobSelector: ".profile__description",
+  avatarSelector: ".profile__image",
 });
 
 newCardPopup.setEventListeners();
 newProfilePopup.setEventListeners();
+newProfilePicture.setEventListeners();
 
 profileAddButton.addEventListener("click", () => {
   newCardPopup.open();
@@ -140,6 +177,20 @@ profileEditButton.addEventListener("click", () => {
 //////////////////////////////////////////////////////////////////////
 //API
 
-const api = new Api;
-api.getInitialCards();
-api.getUserInformation();
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12/",
+  authorizationID: "3d5d45c7-6b7d-40fa-b3ac-6d464d71f592",
+});
+api.getInitialCards().then((res) => {
+  const newCardSection = new Section(
+    { items: res, renderer: createCard },
+    ".cards__list"
+  );
+  newCardSection.renderItems();
+});
+
+api.getUserInformation().then((res) => {
+  profileTitle.textContent = res.name;
+  profileDescription.textContent = res.about;
+  profileImage.src = res.avatar;
+});
