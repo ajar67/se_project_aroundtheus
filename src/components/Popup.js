@@ -1,6 +1,8 @@
 export default class Popup {
   constructor({ popupSelector }) {
     this._popupElement = document.querySelector(popupSelector);
+    this._popupSubmitButton =
+      this._popupElement.querySelector(".modal__button");
   }
 
   open() {
@@ -30,5 +32,9 @@ export default class Popup {
         this.close();
       }
     });
+  }
+
+  setSubmitButtonText() {
+    this._popupSubmitButton.textContent = "Saving...";
   }
 }

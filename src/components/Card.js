@@ -49,8 +49,8 @@ class Card {
       .classList.remove("card__like-button_active");
   }
 
-  isLiked(userId) {
-    return this._likes.find(({ _id }) => userId === _id);
+  isLiked() {
+    return this._likes.find(({ _id }) => this._userId === _id);
   }
 
   updateLikes(likes) {
@@ -59,8 +59,13 @@ class Card {
   }
 
   renderLikes() {
-    let cardLikeNumber = this._element.querySelector(".card__like-number");
+    const cardLikeNumber = this._element.querySelector(".card__like-number");
     cardLikeNumber.textContent = this._likes.length;
+    if (this.isLiked(this._userId)) {
+      this.like();
+    } else {
+      this.unlike();
+    }
   }
 
   _getTemplate() {
@@ -76,9 +81,6 @@ class Card {
     const cardImage = this._element.querySelector(".card__image");
     const cardText = this._element.querySelector(".card__text");
     this.renderLikes();
-    if (this.isLiked(this._userId)) {
-      this.like();
-    }
     cardImage.src = this._link;
     cardImage.alt = this._text;
     cardText.textContent = this._text;
@@ -90,6 +92,7 @@ class Card {
 
   removeCard() {
     this._element.remove();
+    this._element.null;
   }
 }
 
