@@ -1,20 +1,34 @@
 class Card {
-  constructor(data, cardSelector, handleCardClick, handleDeleteCard) {
+  constructor(
+    data,
+    userId,
+    isOwner,
+    cardSelector,
+    handleCardClick,
+    handleDeleteCard,
+    handleLikeButton
+  ) {
     this._text = data.name;
     this._link = data.link;
+    this.id = data._id;
+    this._userId = userId;
+    this._isOwner = isOwner;
+    this._likes = data.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
+    this._handleLikeButton = handleLikeButton;
   }
 
   _setEventListeners() {
     this._element
       .querySelector(".card__like-button")
-      .addEventListener("click", () => this._handleLikeButton());
+      .addEventListener("click", () => this._handleLikeButton(this));
 
-    this._element
-      .querySelector(".card__trash-button")
-      .addEventListener("click", () => this._handleDeleteCard(this));
+    this._trashButton = this._element.querySelector(".card__trash-button");
+    this._trashButton.addEventListener("click", () =>
+      this._handleDeleteCard(this)
+    );
 
     this._element
       .querySelector(".card__image")
@@ -23,10 +37,30 @@ class Card {
       );
   }
 
-  _handleLikeButton() {
+  like() {
     this._element
       .querySelector(".card__like-button")
-      .classList.toggle("card__like-button_active");
+      .classList.add("card__like-button_active");
+  }
+
+  unlike() {
+    this._element
+      .querySelector(".card__like-button")
+      .classList.remove("card__like-button_active");
+  }
+
+  isLiked(userId) {
+    return this._likes.find(({ _id }) => userId === _id);
+  }
+
+  updateLikes(likes) {
+    this._likes = likes;
+    this.renderLikes();
+  }
+
+  renderLikes() {
+    let cardLikeNumber = this._element.querySelector(".card__like-number");
+    cardLikeNumber.textContent = this._likes.length;
   }
 
   _getTemplate() {
@@ -41,10 +75,21 @@ class Card {
     this._setEventListeners();
     const cardImage = this._element.querySelector(".card__image");
     const cardText = this._element.querySelector(".card__text");
+    this.renderLikes();
+    if (this.isLiked(this._userId)) {
+      this.like();
+    }
     cardImage.src = this._link;
     cardImage.alt = this._text;
     cardText.textContent = this._text;
+    if (this._isOwner) {
+      this._trashButton.classList.add("card__trash_visible");
+    }
     return this._element;
+  }
+
+  removeCard() {
+    this._element.remove();
   }
 }
 

@@ -123,11 +123,12 @@
   margin-top: 0px;
 }
 
-#change-profile-pic .modal__button {
-}
-
 .modal__button:hover:not(:disabled) {
   opacity: 0.8;
+}
+
+.modal__button_disabled {
+  opacity: 0.2;
 }
 
 .modal__button-reset {

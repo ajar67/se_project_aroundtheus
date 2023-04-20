@@ -33,6 +33,8 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import Api from "../components/Api.js";
 
+let newCardSection;
+
 const editFormValidator = new FormValidator(
   validationSettings,
   profileFormElement
@@ -82,51 +84,74 @@ newPopupImage.setEventListeners();
 const newDeletePopup = new PopupWithForm("#delete-card", () => {});
 newDeletePopup.setEventListeners();
 
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12/",
+  authorizationID: "3d5d45c7-6b7d-40fa-b3ac-6d464d71f592",
+});
+
+let userId = "";
+
+api.getUserInformation().then((res) => {
+  profileTitle.textContent = res.name;
+  profileDescription.textContent = res.about;
+  profileImage.src = res.avatar;
+  userId = res._id;
+});
+
 const handleDeleteClick = (card) => {
   newDeletePopup.setSubmitAction(() => {
-    api.deleteCard(card.id).then((res) => {
-      console.log(res);
+    api.deleteCard(card.id).then(() => {
       newDeletePopup.close();
+      card.removeCard();
     });
   });
   newDeletePopup.open();
 };
 
+const handleLikeButton = (card) => {
+  if (card.isLiked(userId)) {
+    api.removingLikes(card.id).then((res) => {
+      card.updateLikes(res.likes);
+    });
+    card.unlike();
+  } else {
+    api.addingLikes(card.id).then((res) => {
+      card.updateLikes(res.likes);
+    });
+    card.like();
+  }
+};
+
 const createCard = (cardData) => {
   const card = new Card(
     cardData,
+    userId,
+    cardData.owner._id === userId,
     ".template",
     (data) => {
       newPopupImage.open(data);
     },
-    handleDeleteClick
+    handleDeleteClick,
+    handleLikeButton
   );
   return card.getView();
 };
 
-// const newCardSection = new Section(
-//   { items: initialCards, renderer: createCard },
-//   ".cards__list"
-// );
-//newCardSection.renderItems();
-
 const newProfilePopup = new PopupWithForm("#profile-popup", (inputValues) => {
-  newUserInfo.setUserInfo(inputValues.name, inputValues.description);
-  editFormValidator.disableButton();
   api
-    .editProfile({ name: inputValues.name, about: inputValues.description }) // It doesn't show that it is doing this in the browser
+    .editProfile({ name: inputValues.name, about: inputValues.description })
     .then((res) => {
-      console.log(res);
+      newUserInfo.setUserInfo(res.name, res.about);
+      editFormValidator.disableButton();
     });
 });
 
 const newCardPopup = new PopupWithForm("#add-card-popup", (inputValues) => {
-  const card = createCard({ name: inputValues.title, link: inputValues.image });
-  newCardSection.addItem(card);
   api
-    .addNewCard({ name: inputValues.title, link: inputValues.image }) // same thing doesn't show that it is getting to the server
+    .addNewCard({ name: inputValues.title, link: inputValues.image })
     .then((res) => {
-      console.log(res);
+      const card = createCard({ name: res.name, link: res.link });
+      newCardSection.addItem(card);
     });
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -135,13 +160,10 @@ const newCardPopup = new PopupWithForm("#add-card-popup", (inputValues) => {
 const newProfilePicture = new PopupWithForm(
   "#change-profile-pic",
   (inputValue) => {
-    changePicValidator.disableButton();
-    newUserInfo.setAvatar(inputValue.image);
-    api
-      .updateProfPic(inputValue.image) // doesn't show that it is getting to the server gotta figure it out
-      .then((res) => {
-        console.log(res);
-      });
+    api.updateProfPic(inputValue.image).then((res) => {
+      changePicValidator.disableButton();
+      newUserInfo.setAvatar(res.avatar);
+    });
   }
 );
 
@@ -177,20 +199,18 @@ profileEditButton.addEventListener("click", () => {
 //////////////////////////////////////////////////////////////////////
 //API
 
-const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-12/",
-  authorizationID: "3d5d45c7-6b7d-40fa-b3ac-6d464d71f592",
-});
-api.getInitialCards().then((res) => {
-  const newCardSection = new Section(
-    { items: res, renderer: createCard },
+api.getInitialCards().then((cards) => {
+  newCardSection = new Section(
+    {
+      items: cards,
+      renderer: (item) => createCard(item, item.owner._id === userId),
+    },
     ".cards__list"
   );
+
   newCardSection.renderItems();
 });
 
-api.getUserInformation().then((res) => {
-  profileTitle.textContent = res.name;
-  profileDescription.textContent = res.about;
-  profileImage.src = res.avatar;
-});
+/*
+cardLikeNumber.textContent = res.likes.length
+*/

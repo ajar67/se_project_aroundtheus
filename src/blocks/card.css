@@ -78,6 +78,12 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
+  visibility: hidden;
+}
+
+.card__trash_visible {
+  visibility: visible;
+  opacity: 1;
 }
 
 .card__trash-button:hover {

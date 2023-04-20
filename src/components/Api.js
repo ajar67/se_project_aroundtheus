@@ -29,7 +29,7 @@ export default class Api {
     });
   }
 
-  editProfile({name, about}) {
+  editProfile({ name, about }) {
     return fetch(`${this._baseUrl}users/me`, {
       method: "PATCH",
       headers: this._header,
@@ -45,7 +45,7 @@ export default class Api {
     });
   }
 
-  addNewCard({name, link}) {
+  addNewCard({ name, link }) {
     return fetch(`${this._baseUrl}cards`, {
       method: "POST",
       headers: this._header,
@@ -80,6 +80,30 @@ export default class Api {
       body: JSON.stringify({
         avatar,
       }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  addingLikes(id) {
+    return fetch(`${this._baseUrl}cards/likes/${id}`, {
+      method: "PUT",
+      headers: this._header,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  removingLikes(id) {
+    return fetch(`${this._baseUrl}cards/likes/${id}`, {
+      method: "DELETE",
+      headers: this._header,
     }).then((res) => {
       if (res.ok) {
         return res.json();

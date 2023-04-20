@@ -65,6 +65,5 @@ export const profileTitle = document.querySelector(".profile__title");
 export const profileDescription = document.querySelector(
   ".profile__description"
 );
-export const cardLikeNumber = document.querySelector(".card__like-number");
 export const changePicForm = document.querySelector("#change-pic-form");
 export const deleteCardForm = document.querySelector("#delete-card-form");
