@@ -92,9 +92,9 @@ const api = new Api({
 let userId;
 
 Promise.all([api.getUserInformation(), api.getInitialCards()])
-  .then(([res, cards]) => {
-    userInfo.setUserInfo(res.name, res.about);
-    userInfo.setAvatar(res.avatar);
+  .then(([user, cards]) => {
+    userInfo.setUserInfo(user.name, user.about);
+    userInfo.setAvatar(user.avatar);
     userId = user._id;
     // initialize cards section
     cardSection = new Section(
@@ -107,7 +107,7 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
 
     cardSection.renderItems();
   })
-  .catch(() => console.log("Error"));
+  .catch((err) => console.log(err));
 
 /*api
   .getInitialCards()
@@ -141,16 +141,14 @@ api
 
 const handleDeleteClick = (card) => {
   deletePopup.setSubmitAction(() => {
-    deletePopup.setSubmitButtonText();
+    deletePopup.setDeleteButtonText();
     api
       .deleteCard(card.id)
       .then(() => {
         deletePopup.close();
         card.removeCard();
       })
-      .catch((res) => {
-        Promise.reject(`Error: ${res.status}`);
-      });
+      .catch((err) => console.log(err));
   });
   deletePopup.open();
 };
@@ -162,9 +160,7 @@ const handleLikeButton = (card) => {
       .then((res) => {
         card.updateLikes(res.likes);
       })
-      .catch((res) => {
-        Promise.reject(`Error: ${res.status}`);
-      });
+      .catch((err) => console.log(err));
     //card.unlike();
   } else {
     api
@@ -172,9 +168,7 @@ const handleLikeButton = (card) => {
       .then((res) => {
         card.updateLikes(res.likes);
       })
-      .catch((res) => {
-        Promise.reject(`Error: ${res.status}`);
-      });
+      .catch((err) => console.log(err));
     //card.like();
   }
 };
@@ -203,9 +197,7 @@ const profilePopup = new PopupWithForm("#profile-popup", (inputValues) => {
       //editFormValidator.disableButton();
       profilePopup.close();
     })
-    .catch((res) => {
-      Promise.reject(`Error: ${res.status}`);
-    });
+    .catch((err) => console.log(err));
 });
 
 const cardPopup = new PopupWithForm("#add-card-popup", (inputValues) => {
@@ -217,9 +209,7 @@ const cardPopup = new PopupWithForm("#add-card-popup", (inputValues) => {
       cardSection.addItem(card);
       cardPopup.close();
     })
-    .catch((res) => {
-      Promise.reject(`Error: ${res.status}`);
-    });
+    .catch((err) => console.log(err));
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -235,9 +225,7 @@ const profilePicture = new PopupWithForm(
         userInfo.setAvatar(res.avatar);
         profilePicture.close();
       })
-      .catch((res) => {
-        Promise.reject(`Error: ${res.status}`);
-      });
+      .catch((err) => console.log(err));
   }
 );
 

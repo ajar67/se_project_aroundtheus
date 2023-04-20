@@ -16,13 +16,13 @@ export default class Api {
   getUserInformation() {
     return fetch(`${this._baseUrl}users/me`, {
       headers: this._header,
-    }).then(this._processServerResponse);
+    }).then(this._processResponseServer);
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {
       headers: this._header,
-    }).then(this._processServerResponse);
+    }).then(this._processResponseServer);
   }
 
   editProfile({ name, about }) {
@@ -33,7 +33,7 @@ export default class Api {
         name,
         about,
       }),
-    }).then(this._processServerResponse);
+    }).then(this._processResponseServer);
   }
 
   addNewCard({ name, link }) {
@@ -44,14 +44,14 @@ export default class Api {
         name,
         link,
       }),
-    }).then(this._processServerResponse);
+    }).then(this._processResponseServer);
   }
 
   deleteCard(id) {
     return fetch(`${this._baseUrl}cards/${id}`, {
       method: "DELETE",
       headers: this._header,
-    }).then(this._processServerResponse);
+    }).then(this._processResponseServer);
   }
 
   updateProfPic(avatar) {
@@ -61,20 +61,20 @@ export default class Api {
       body: JSON.stringify({
         avatar,
       }),
-    }).then(this._processServerResponse);
+    }).then(this._processResponseServer);
   }
 
   addLike(id) {
     return fetch(`${this._baseUrl}cards/likes/${id}`, {
       method: "PUT",
       headers: this._header,
-    }).then(this._processServerResponse);
+    }).then(this._processResponseServer);
   }
 
   removeLike(id) {
     return fetch(`${this._baseUrl}cards/likes/${id}`, {
       method: "DELETE",
       headers: this._header,
-    }).then(this._processServerResponse);
+    }).then(this._processResponseServer);
   }
 }
