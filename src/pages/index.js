@@ -81,7 +81,7 @@ formValidators['profile-form'].resetValidation();*/
 const popupImage = new PopupWithImage({ popupSelector: "#picture-popup" });
 popupImage.setEventListeners();
 
-const deletePopup = new PopupWithConfirmation("#delete-card", () => {});
+const deletePopup = new PopupWithConfirmation("#delete-card");
 deletePopup.setEventListeners();
 
 const api = new Api({
@@ -109,36 +109,6 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
   })
   .catch((err) => console.log(err));
 
-/*api
-  .getInitialCards()
-  .then((cards) => {
-    cardSection = new Section(
-      {
-        items: cards,
-        renderer: (item) => createCard(item, item.owner._id === userId),
-      },
-      ".cards__list"
-    );
-
-    cardSection.renderItems();
-  })
-  .catch((res) => {
-    Promise.reject(`Error: ${res.status}`);
-});
-api
-  .getUserInformation()
-  .then((res) => {
-    userInfo.setUserInfo(res.name, res.about);
-    userInfo.setAvatar(res.avatar);
-    // profileTitle.textContent = res.name;
-    // profileDescription.textContent = res.about;
-    // profileImage.src = res.avatar;
-    userId = res._id;
-  })
-  .catch((res) => {
-    Promise.reject(`Error: ${res.status}`);
-});*/
-
 const handleDeleteClick = (card) => {
   deletePopup.setSubmitAction(() => {
     deletePopup.setDeleteButtonText();
@@ -161,7 +131,6 @@ const handleLikeButton = (card) => {
         card.updateLikes(res.likes);
       })
       .catch((err) => console.log(err));
-    //card.unlike();
   } else {
     api
       .addLike(card.id)
@@ -169,7 +138,6 @@ const handleLikeButton = (card) => {
         card.updateLikes(res.likes);
       })
       .catch((err) => console.log(err));
-    //card.like();
   }
 };
 
@@ -194,7 +162,6 @@ const profilePopup = new PopupWithForm("#profile-popup", (inputValues) => {
     .editProfile({ name: inputValues.name, about: inputValues.description })
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about);
-      //editFormValidator.disableButton();
       profilePopup.close();
     })
     .catch((err) => console.log(err));
@@ -205,7 +172,7 @@ const cardPopup = new PopupWithForm("#add-card-popup", (inputValues) => {
   api
     .addNewCard({ name: inputValues.title, link: inputValues.image })
     .then((res) => {
-      const card = createCard({ name: res.name, link: res.link });
+      const card = createCard(res);
       cardSection.addItem(card);
       cardPopup.close();
     })
