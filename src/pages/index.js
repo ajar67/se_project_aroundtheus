@@ -156,34 +156,49 @@ const createCard = (cardData) => {
   return card.getView();
 };
 
-const profilePopup = new PopupWithForm("#profile-popup", (inputValues) => {
-  profilePopup.setSubmitButtonText();
-  api
-    .editProfile({ name: inputValues.name, about: inputValues.description })
-    .then((res) => {
-      userInfo.setUserInfo(res.name, res.about);
-      profilePopup.close();
-    })
-    .catch((err) => console.log(err));
+const profilePopup = new PopupWithForm("#profile-popup", {
+  handleSubmit: (inputValues) => {
+    profilePopup.showLoading();
+    api
+      .editProfile({ name: inputValues.name, about: inputValues.description })
+      .then((res) => {
+        userInfo.setUserInfo(res.name, res.about);
+        profilePopup.close();
+        profilePopup.hideLoading();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        console.log("Finished!");
+      });
+  },
+  buttonText: "Save",
+  loadingButtonText: "Saving..",
 });
 
-const cardPopup = new PopupWithForm("#add-card-popup", (inputValues) => {
-  cardPopup.setSubmitButtonText();
-  api
-    .addNewCard({ name: inputValues.title, link: inputValues.image })
-    .then((res) => {
-      const card = createCard(res);
-      cardSection.addItem(card);
-      cardPopup.close();
-    })
-    .catch((err) => console.log(err));
+const cardPopup = new PopupWithForm("#add-card-popup", {
+  handleSubmit: (inputValues) => {
+    cardPopup.showLoading();
+    api
+      .addNewCard({ name: inputValues.title, link: inputValues.image })
+      .then((res) => {
+        const card = createCard(res);
+        cardSection.addItem(card);
+        cardPopup.close();
+        cardPopup.hideLoading();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        console.log("Finished!");
+      });
+  },
+  buttonText: "Create",
+  loadingButtonText: "Creating...",
 });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const profilePicture = new PopupWithForm(
-  "#change-profile-pic",
-  (inputValue) => {
+const profilePicture = new PopupWithForm("#change-profile-pic", {
+  handleSubmit: (inputValue) => {
     profilePicture.setSubmitButtonText();
     api
       .updateProfPic(inputValue.image)
@@ -192,9 +207,14 @@ const profilePicture = new PopupWithForm(
         userInfo.setAvatar(res.avatar);
         profilePicture.close();
       })
-      .catch((err) => console.log(err));
-  }
-);
+      .catch((err) => console.log(err))
+      .finally(() => {
+        console.log("Finished!");
+      });
+  },
+  buttonText: "Save",
+  loadingButtonText: "Saving..",
+});
 
 profileImageButton.addEventListener("click", () => {
   changePicValidator.disableButton();
@@ -223,5 +243,4 @@ profileEditButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.name;
   jobInput.value = userData.description;
-  addFormValidator.disableButton();
 });

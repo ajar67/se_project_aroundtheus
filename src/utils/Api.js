@@ -5,13 +5,14 @@ export default class Api {
       authorization: authorizationID,
       "Content-Type": "application/json",
     };
-    this._processResponseServer = (res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    };
   }
+
+  _processResponseServer = (res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
+  };
 
   getUserInformation() {
     return fetch(`${this._baseUrl}users/me`, {
