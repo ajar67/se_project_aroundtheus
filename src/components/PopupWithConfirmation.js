@@ -1,10 +1,12 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithConfirmation extends Popup {
-  constructor(popupSelector) {
+  constructor(popupSelector, { buttonText, loadingButtonText }) {
     super({ popupSelector });
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._popupDeleteButton = this._popupForm.querySelector(".modal__button");
+    this._buttonText = buttonText;
+    this._loadingBUttonText = loadingButtonText;
   }
 
   setEventListeners() {
@@ -19,8 +21,12 @@ export default class PopupWithConfirmation extends Popup {
     this._handleConfirmationCallback = callback;
   }
 
-  setDeleteButtonText() {
-    this._popupDeleteButton.textContent = "Deleting...";
+  showLoadingDelete() {
+    this._popupDeleteButton.textContent = this._loadingButtonText;
+  }
+
+  hideLoadingDelete() {
+    this._popupDeleteButton.textContent = this._buttonText;
   }
 
   close() {

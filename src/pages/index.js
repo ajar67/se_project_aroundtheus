@@ -81,7 +81,10 @@ formValidators['profile-form'].resetValidation();*/
 const popupImage = new PopupWithImage({ popupSelector: "#picture-popup" });
 popupImage.setEventListeners();
 
-const deletePopup = new PopupWithConfirmation("#delete-card");
+const deletePopup = new PopupWithConfirmation("#delete-card", {
+  buttonText: "Yes",
+  loadingButtonText: "Deleting...",
+});
 deletePopup.setEventListeners();
 
 const api = new Api({
@@ -111,14 +114,17 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
 
 const handleDeleteClick = (card) => {
   deletePopup.setSubmitAction(() => {
-    deletePopup.setDeleteButtonText();
+    deletePopup.showLoadingDelete();
     api
       .deleteCard(card.id)
       .then(() => {
         deletePopup.close();
         card.removeCard();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        deletePopup.hideLoadingDelete();
+      });
   });
   deletePopup.open();
 };
@@ -164,11 +170,10 @@ const profilePopup = new PopupWithForm("#profile-popup", {
       .then((res) => {
         userInfo.setUserInfo(res.name, res.about);
         profilePopup.close();
-        profilePopup.hideLoading();
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        console.log("Finished!");
+        profilePopup.hideLoading();
       });
   },
   buttonText: "Save",
@@ -184,11 +189,10 @@ const cardPopup = new PopupWithForm("#add-card-popup", {
         const card = createCard(res);
         cardSection.addItem(card);
         cardPopup.close();
-        cardPopup.hideLoading();
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        console.log("Finished!");
+        cardPopup.hideLoading();
       });
   },
   buttonText: "Create",
@@ -199,7 +203,7 @@ const cardPopup = new PopupWithForm("#add-card-popup", {
 
 const profilePicture = new PopupWithForm("#change-profile-pic", {
   handleSubmit: (inputValue) => {
-    profilePicture.setSubmitButtonText();
+    profilePicture.showLoading();
     api
       .updateProfPic(inputValue.image)
       .then((res) => {
@@ -209,7 +213,7 @@ const profilePicture = new PopupWithForm("#change-profile-pic", {
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        console.log("Finished!");
+        profilePicture.hideLoading();
       });
   },
   buttonText: "Save",

@@ -22,7 +22,7 @@
   width: 430px;
 }
 
-#delete-card .modal__container {
+.modal__container_place_delete {
   position: relative;
   background-color: white;
   color: black;
@@ -31,7 +31,7 @@
   width: 430px;
 }
 
-#change-profile-pic .modal__container {
+.modal__container_place_profpic {
   position: relative;
   background-color: white;
   color: black;
@@ -62,12 +62,12 @@
   height: 23px;
 }
 
-#delete-card .modal__title {
+.modal__title_place_delete {
   margin-top: 34px;
   margin-bottom: 38px;
 }
 
-#change-profile-pic .modal__title {
+.modal__title_place_profpic {
   margin-top: 34px;
   margin-bottom: 54px;
 }
@@ -85,7 +85,7 @@
   border-right: none;
 }
 
-#change-profile-pic .modal__input {
+.modal__input_place_profpic {
   height: 27px;
 }
 
@@ -116,9 +116,10 @@
   margin-bottom: 36.5px;
   cursor: pointer;
   font-family: "Inter", sans-serif;
+  border: none;
 }
 
-#delete-card .modal__button {
+.modal__button_place_delete {
   height: 50px;
   margin-top: 0px;
 }
@@ -129,6 +130,7 @@
 
 .modal__button_disabled {
   opacity: 0.2;
+  cursor: default;
 }
 
 .modal__button-reset {
