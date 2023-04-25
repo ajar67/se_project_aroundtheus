@@ -114,7 +114,7 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
 
 const handleDeleteClick = (card) => {
   deletePopup.setSubmitAction(() => {
-    deletePopup.showLoadingDelete();
+    deletePopup.showLoading();
     api
       .deleteCard(card.id)
       .then(() => {
@@ -123,7 +123,7 @@ const handleDeleteClick = (card) => {
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        deletePopup.hideLoadingDelete();
+        deletePopup.hideLoading();
       });
   });
   deletePopup.open();
